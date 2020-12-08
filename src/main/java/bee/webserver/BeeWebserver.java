@@ -7,6 +7,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.*;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 class bound_coords
 {
     public String coord_id;
@@ -102,4 +104,47 @@ public class BeeWebserver {
             }
         }
     }*/
+
+    //function that should return all of rows in the specified database table name.
+    public void getData(String databaseName)
+    {
+        String SQL = "SELECT count(*) FROM " + databaseName;
+
+        try(Connection conn = getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL)){
+
+                rs.next();
+        }
+        catch(SQLException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    //get count of how many rows are in the table
+    public int getCount(String databasename)
+    {
+        String SQL = "SELECT count(*) FROM " + databasename;
+        int count = 0;
+
+        try (Connection conn = getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL)){
+
+            rs.next();
+            count = rs.getInt(1);
+        }
+        catch(SQLException ex){
+            System.out.println(ex.getMessage();
+        }
+
+        return count;
+    }
+
+    //function to display data
+    private void display(ResultSet rs) throws SQLException{
+
+    }
+
 }
