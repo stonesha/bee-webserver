@@ -7,6 +7,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.*;
 
+class bound_coords
+{
+    public String coord_id;
+    //geography geog;
+    public String event_id;
+    public int ordinal;
+};
 
 public class BeeWebserver {
 	public static void main(String[] args) throws Exception {
@@ -43,13 +50,56 @@ public class BeeWebserver {
         }
     }
 
-    private static void addPoint(Connection conn, String coord_id, double lat, double lon, String event_id, int ordinal) throws URISyntaxException, SQLException {
-        if(conn != null){
+    private static void insertBound_coords(Connection conn, bound_coords b) throws URISyntaxException, SQLException {
+      /* String SQL = "INSERT INTO bound_coords(coord_id, event_id) " + "VALUES(?,?,?,?)"; //missing ordinal, geog type
+
+       long id = 0;
+
+       if(conn != null){
+           PreparedStatement pstmt = conn.prepareStatement(SQL,Statement.RETURN_GENERATED_KEYS());
+            pstmt.setString(1, b.coord_id);
+            //pstmt.setString(2, b.geog);
+            pstmt.setString(2, b.event_id);
+            // pstmt.setString(3, b.ordinal);
+
+            int affectedRows = pstmt.executeUpdate();
+
+            if(affectedRows > 0){
+               try (ResultSet rs = pstmt.getGeneratedKeys()){
+                    if (rs.next()) {
+                       id = rs.getLong(1);
+                      }
+                } catch (SQLException ex){
+                   System.out.println(ex.getMessage());
+                }
+            }
+        } 
+       
+       return id;
+    }*/
+       
+       
+       
+       
+       
+       
+         if(conn != null){
             try{
                 Statement statement = conn.createStatement();
-                statement.executeUpdate("INSERT INTO bound_coords VALUES (coord_id, lat, lon, event_id, ordinal)");
+                statement.executeUpdate("INSERT INTO bound_coords VALUES (b.coord_id, b.geog, b.event_id, b.ordinal)");
 
             } catch (SQLException e) {System.out.println("addPoint - something went wrong.");}
         }
     }
+
+    
+
+    /*private static void deletePoint(Connection conn, bound_coords b, index i) throws URISyntaxException, SQLException {
+        if(conn != null){
+            try{
+                Statement statement = conn.createStatement();
+                statement.executeUpdate("")
+            }
+        }
+    }*/
 }
