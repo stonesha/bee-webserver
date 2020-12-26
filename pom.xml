@@ -4,4 +4,16 @@
     <groupId>bee.team</groupId>
     <artifactId>bee-server</artifactId>
     <version>1</version>
+
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jdbc</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+      </dependency>
+    </dependencies>
+
 </project>
