@@ -22,4 +22,9 @@ class HelloController{
 	String hello(){
 		return "Hello World";
 	}
+
+	@GetMapping("/test")
+	String test(){
+		return "PeePeePooPoo";
+	}
 }
