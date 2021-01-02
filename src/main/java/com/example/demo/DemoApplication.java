@@ -18,7 +18,7 @@ public class DemoApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception{
-		String sql = "INSERT INTO routes (status, route_id, event_id, last_update) Values ("
+		String sql = "INSERT INTO routes (status, route_id, event_id, last_update) VALUES ("
 				+ "'safe', 'null', 'null', 'null')";
 
 		int rows = jdbcTemplate.update(sql);
