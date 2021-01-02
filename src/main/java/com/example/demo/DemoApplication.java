@@ -23,7 +23,7 @@ public class DemoApplication implements CommandLineRunner{
 
 		int rows = jdbcTemplate.update(sql);
 		if (rows > 0){
-			System.out.println("a new row has been created")
+			System.out.println("a new row has been created");
 		}
 	}
 
