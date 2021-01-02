@@ -1,10 +1,10 @@
-package com.example.demo;
+package com.Bee.BeeWebserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class BeeWebserverApplicationTests {
 
 	@Test
 	void contextLoads() {
