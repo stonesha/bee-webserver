@@ -24,7 +24,7 @@ import java.sql.SQLException;
 @SpringBootApplication
 public class BeeWebserverApplication {
 
-	@Value("spring.datasource.url")
+	@Value("${spring.datasource.url}")
 	private String dbUrl;
 
 	@Autowired
