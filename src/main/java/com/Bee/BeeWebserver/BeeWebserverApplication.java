@@ -20,24 +20,19 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
+@RestController
 @SpringBootApplication
 public class BeeWebserverApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(BeeWebserverApplication.class, args);
-	}
-
-}
-
-@RestController
-class HelloController{
 
 	@Value("spring.datasource.url")
 	private String dbUrl;
 
 	@Autowired
 	private DataSource dataSource;
+
+	public static void main(String[] args) {
+		SpringApplication.run(BeeWebserverApplication.class, args);
+	}
 
 	@GetMapping("/")
 	String hello(){
@@ -62,7 +57,7 @@ class HelloController{
 		return "it just works";
 	}
 
-	@Bean
+/*	@Bean
 	public DataSource dataSource() throws SQLException
 	{
 		if(dbUrl == null || dbUrl.isEmpty())
@@ -75,7 +70,8 @@ class HelloController{
 			config.setJdbcUrl(dbUrl);
 			return new HikariDataSource(config);
 		}
-	} 
+	} */
 }
+
 
 
