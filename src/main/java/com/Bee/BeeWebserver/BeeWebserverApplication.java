@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.jbdc.core.JbdcTemplate;
 
 @SpringBootApplication
 public class BeeWebserverApplication {
@@ -26,5 +27,10 @@ class HelloController{
 	@GetMapping("/test")
 	String test(){
 		return "PeePeePooPoo";
+	}
+
+	@GetMapping("/demo")
+	String demo(){
+		return "it just works";
 	}
 }
