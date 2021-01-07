@@ -41,7 +41,6 @@ public class BeeWebserverApplication {
 
 	@GetMapping("/test")
 	String test(){
-		return "PeePeePooPoo";
 		try (Connection connection = dataSource.getConnection()) 
 		{
 			return "PeePeePooPoo";
@@ -55,7 +54,7 @@ public class BeeWebserverApplication {
 	@GetMapping("/demo")
 	String demo(){
 		//String dbUrl = System.getenv("JBDC_DATABASE_URL");
-    return dbUrl;
+    	return "demo";
 	}
 
 	@Bean
