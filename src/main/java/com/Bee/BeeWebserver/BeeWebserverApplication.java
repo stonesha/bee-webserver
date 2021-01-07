@@ -46,17 +46,18 @@ class HelloController{
 
 	@GetMapping("/test")
 	String test(){
-		try (Connection connection = dataSource.getConnection()) 
+		return "PeePeePooPoo";
+/*		try (Connection connection = dataSource.getConnection()) 
 		{
 			return "PeePeePooPoo";
 		} 
 		catch(Exception e) 
 		{
 			return "Error";
-		}
+		} */
 	}
 
-	@Bean
+/*	@Bean
 	public DataSource dataSource() throws SQLException
 	{
 		if(dbUrl == null || dbUrl.isEmpty())
@@ -69,7 +70,7 @@ class HelloController{
 			config.setJdbcUrl(dbUrl);
 			return new HikariDataSource(config);
 		}
-	}
+	} */
 
 	@GetMapping("/demo")
 	String demo(){
