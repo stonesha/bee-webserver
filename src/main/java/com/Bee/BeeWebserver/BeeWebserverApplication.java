@@ -54,7 +54,8 @@ public class BeeWebserverApplication {
 
 	@GetMapping("/demo")
 	String demo(){
-		return "it just works";
+		String dbUrl = System.getenv("JBDC_DATABASE_URL");
+		return dbUrl;
 	}
 
 	@Bean
