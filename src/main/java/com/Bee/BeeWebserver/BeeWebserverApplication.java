@@ -55,10 +55,10 @@ public class BeeWebserverApplication {
 	@GetMapping("/demo")
 	String demo(){
 		//String dbUrl = System.getenv("JBDC_DATABASE_URL");
-		return System.getenv();
+    return dbUrl;
 	}
 
-	@Bean
+	/*@Bean
 	public DataSource dataSource() throws SQLException
 	{
 		if(dbUrl == null || dbUrl.isEmpty())
@@ -71,7 +71,7 @@ public class BeeWebserverApplication {
 			config.setJdbcUrl(dbUrl);
 			return new HikariDataSource(config);
 		}
-	} 
+	} */
 }
 
 
