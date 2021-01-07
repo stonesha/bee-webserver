@@ -57,7 +57,12 @@ class HelloController{
 		} */
 	}
 
-/*	@Bean
+	@GetMapping("/demo")
+	String demo(){
+		return "it just works";
+	}
+
+	@Bean
 	public DataSource dataSource() throws SQLException
 	{
 		if(dbUrl == null || dbUrl.isEmpty())
@@ -70,12 +75,7 @@ class HelloController{
 			config.setJdbcUrl(dbUrl);
 			return new HikariDataSource(config);
 		}
-	} */
-
-	@GetMapping("/demo")
-	String demo(){
-		return "it just works";
-	}
+	} 
 }
 
 
