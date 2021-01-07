@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.jbdc.core.JbdcTemplate;
 
 //Test dependencies for database connection
 import com.zaxxer.hikari.HikariConfig;
@@ -68,6 +69,11 @@ class HelloController{
 			config.setJdbcUrl(dbUrl);
 			return new HikariDataSource(config);
 		}
+	}
+
+	@GetMapping("/demo")
+	String demo(){
+		return "it just works";
 	}
 }
 
