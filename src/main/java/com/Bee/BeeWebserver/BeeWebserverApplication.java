@@ -42,14 +42,14 @@ public class BeeWebserverApplication {
 	@GetMapping("/test")
 	String test(){
 		return "PeePeePooPoo";
-/*		try (Connection connection = dataSource.getConnection()) 
+		try (Connection connection = dataSource.getConnection()) 
 		{
 			return "PeePeePooPoo";
 		} 
 		catch(Exception e) 
 		{
 			return "Error";
-		} */
+		} 
 	}
 
 	@GetMapping("/demo")
