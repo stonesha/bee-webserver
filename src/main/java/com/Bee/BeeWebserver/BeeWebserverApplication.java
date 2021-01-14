@@ -46,12 +46,12 @@ public class BeeWebserverApplication {
 		try (Connection connection = dataSource.getConnection()) 
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO routes (status) VALUES (safe)");
+			stmt.executeUpdate("INSERT INTO routes (status) VALUES ('safe')");
 			return "PeePeePooPoo";
 		} 
 		catch(Exception e) 
 		{
-			return e;
+			return "error";
 		} 
 	}
 
