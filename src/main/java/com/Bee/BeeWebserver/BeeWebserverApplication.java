@@ -46,13 +46,13 @@ public class BeeWebserverApplication {
 
 	@GetMapping("/test")
 	String test(Map<String, Object> model){
+
+		String something;
 		try (Connection connection = dataSource.getConnection()) 
 		{
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("INSERT INTO locations (name) VALUES ('Jeff')");
 			ResultSet rs = stmt.executeQuery("SELECT name FROM locations");
-
-			String something;
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
