@@ -46,7 +46,7 @@ public class BeeWebserverApplication {
 		try (Connection connection = dataSource.getConnection()) 
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO routes VALUES (safe, null, null, null)");
+			//stmt.executeUpdate("INSERT INTO routes VALUES (safe, null, null, null)");
 			return "PeePeePooPoo";
 		} 
 		catch(Exception e) 
