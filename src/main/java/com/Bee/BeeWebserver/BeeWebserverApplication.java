@@ -47,7 +47,7 @@ public class BeeWebserverApplication {
 	@GetMapping("/test")
 	String test(Map<String, Object> model){
 
-		String something;
+		String something = " ";
 		try (Connection connection = dataSource.getConnection()) 
 		{
 			Statement stmt = connection.createStatement();
