@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import javax.sql.DataSource;
+
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -43,6 +45,8 @@ public class BeeWebserverApplication {
 	String test(){
 		try (Connection connection = dataSource.getConnection()) 
 		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("INSERT INTO routes VALUES (safe, null, null, null)");
 			return "PeePeePooPoo";
 		} 
 		catch(Exception e) 
