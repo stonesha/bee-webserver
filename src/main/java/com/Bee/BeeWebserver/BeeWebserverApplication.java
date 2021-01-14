@@ -45,14 +45,20 @@ public class BeeWebserverApplication {
 	}
 
 	@GetMapping("/test")
-	String test(Map<String, Object> model) {
+	String test(Map<String, Object> model){
 		try (Connection connection = dataSource.getConnection()) 
 		{
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("INSERT INTO locations (name) VALUES ('Jeff')");
 			ResultSet rs = stmt.executeQuery("SELECT name FROM locations");
-	
-			return rs.getString("name");
+
+			ArrayList<String> output = new ArrayList<String>();
+			while (rs.next()) {
+			  output.add("Read from DB: " + rs.getString("name"));
+			}
+			
+			model.put("records", output);
+			return "test";
 		} 
 		catch(Exception e) 
 		{
