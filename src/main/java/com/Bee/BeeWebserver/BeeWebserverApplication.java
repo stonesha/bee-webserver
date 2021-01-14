@@ -58,7 +58,7 @@ public class BeeWebserverApplication {
 			}
 			
 			model.put("records", output);
-			return "test";
+			return model;
 		} 
 		catch(Exception e) 
 		{
