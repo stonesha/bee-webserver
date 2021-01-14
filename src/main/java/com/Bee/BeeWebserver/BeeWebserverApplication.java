@@ -52,16 +52,16 @@ public class BeeWebserverApplication {
 			stmt.executeUpdate("INSERT INTO locations (name) VALUES ('Jeff')");
 			ResultSet rs = stmt.executeQuery("SELECT name FROM locations");
 
-			String test;
+			String something;
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
 			  output.add("Read from DB: " + rs.getString("name"));
-			  test = test + rs.getString("name");
+			  something = rs.getString("name");
 			}
 			
 			model.put("records", output);
-			return test;
+			return something;
 		} 
 		catch(Exception e) 
 		{
