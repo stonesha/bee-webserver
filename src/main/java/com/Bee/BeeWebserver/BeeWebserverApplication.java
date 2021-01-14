@@ -51,7 +51,7 @@ public class BeeWebserverApplication {
 		} 
 		catch(Exception e) 
 		{
-			return "Error";
+			return e;
 		} 
 	}
 
