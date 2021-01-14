@@ -51,14 +51,8 @@ public class BeeWebserverApplication {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("INSERT INTO locations (name) VALUES ('Jeff')");
 			ResultSet rs = stmt.executeQuery("SELECT name FROM locations");
-
-			ArrayList<String> output = new ArrayList<String>();
-			while (rs.next()) {
-			  output.add("Read from DB: " + rs.getString("name"));
-			}
-			
-			model.put("records", output);
-			return test;
+	
+			return rs.getString("name");
 		} 
 		catch(Exception e) 
 		{
