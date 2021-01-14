@@ -57,7 +57,7 @@ public class BeeWebserverApplication {
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
 			  output.add("Read from DB: " + rs.getString("name"));
-			  something = rs.getString("name");
+			  something = something + rs.getString("name");
 			}
 			
 			model.put("records", output);
