@@ -46,10 +46,7 @@ public class BeeWebserverApplication {
 		try (Connection connection = dataSource.getConnection()) 
 		{
 			Statement stmt = connection.createStatement();
-			//stmt.executeUpdate("INSERT INTO routes (status) VALUES ('safe')");
-			stmt.executeUpdate("DROP TABLE IF EXISTS ticks");
-			stmt.executeUpdate("CREATE TABLE ticks (tick timestamp)");
-			stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
+			stmt.executeUpdate("INSERT INTO locations (name) VALUES ('Jeff')");
 			return "PeePeePooPoo";
 		} 
 		catch(Exception e) 
