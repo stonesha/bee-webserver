@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //dependencies for the rest controller
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.sql.ResultSet;
+
 
 @RestController
 @SpringBootApplication
@@ -69,10 +71,16 @@ public class BeeWebserverApplication {
 		} 
 	}
 
-	@GetMapping("/demo")
-	String demo(){
-		//String dbUrl = System.getenv("JBDC_DATABASE_URL");
-    	return "demo";
+	//return relevant info
+	@GetMapping("/Return_Location")
+	string Return_Location(){
+
+	}
+
+	//retrieves json files and parses through them
+	@PostMapping(path = "/Input_Location", consumes = "application/json", produces = "application/json")
+	String Input_Locations(){
+		
 	}
 
 	@Bean
