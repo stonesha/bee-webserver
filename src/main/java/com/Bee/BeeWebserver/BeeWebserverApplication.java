@@ -77,8 +77,8 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO events (severity,instructions,type) VALUES ('extereme','flee','real bad')");
-			ResultSet rs = stmt.executeQuery("SELECT severity FROM locations");
+			stmt.executeUpdate("INSERT INTO events (severity, instructions, type) VALUES ('extreme','flee','real bad')");
+			ResultSet rs = stmt.executeQuery("SELECT severity FROM events");
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
