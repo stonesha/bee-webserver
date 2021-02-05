@@ -71,6 +71,29 @@ public class BeeWebserverApplication {
 		} 
 	}
 
+	@GetMapping("/events")
+	String events(Map<String,Object> model){
+		String test = " ";
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("INSERT INTO events (severity,instructions,type) VALUES ('extereme','flee','real bad')");
+			ResultSet rs = stmt.executeQuery("SELECT severity FROM locations");
+
+			ArrayList<String> output = new ArrayList<String>();
+			while (rs.next()) {
+				output.add("Read from DB: + " rs.getString("severity"));
+				test = test + rs.getString("severity");
+			}
+
+			model.put("records", output);
+			return test;
+		}
+		catch(Exception e){
+			return "error lol idiot";
+		}
+	}
+
 	//return relevant info
 	@GetMapping("/Return_Location")
 	string Return_Location(){
