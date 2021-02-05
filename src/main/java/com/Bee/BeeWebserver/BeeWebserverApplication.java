@@ -82,7 +82,7 @@ public class BeeWebserverApplication {
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
-				output.add("Read from DB: + " rs.getString("severity"));
+				output.add("Read from DB: " + rs.getString("severity"));
 				test = test + rs.getString("severity");
 			}
 
