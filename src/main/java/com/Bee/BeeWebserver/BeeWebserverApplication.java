@@ -102,8 +102,8 @@ public class BeeWebserverApplication {
 
 	//retrieves json files and parses through them
 	@PostMapping(path = "/Input_Location", consumes = "application/json", produces = "application/json")
-	void Input_Locations(){
-		
+	String Input_Locations(@RequestBody Member member){
+		return member;
 	}
 
 	@Bean
