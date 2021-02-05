@@ -101,10 +101,10 @@ public class BeeWebserverApplication {
 	}*/
 
 	//retrieves json files and parses through them
-	@PostMapping(path = "/Input_Location", consumes = "application/json", produces = "application/json")
-	String Input_Locations(@RequestBody Member member){
-		return member;
-	}
+	/*@PostMapping(path = "/Input_Location", consumes = "application/json", produces = "application/json")
+	String Input_Locations(){
+		
+	}*/
 
 	@Bean
 	public DataSource dataSource() throws SQLException
