@@ -94,17 +94,17 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	//return relevant info
+	/*return relevant info
 	@GetMapping("/Return_Location")
-	string Return_Location(){
+	String Return_Location(){
 
-	}
+	}*/
 
-	//retrieves json files and parses through them
+	/*retrieves json files and parses through them
 	@PostMapping(path = "/Input_Location", consumes = "application/json", produces = "application/json")
 	String Input_Locations(){
 		
-	}
+	}*/
 
 	@Bean
 	public DataSource dataSource() throws SQLException
