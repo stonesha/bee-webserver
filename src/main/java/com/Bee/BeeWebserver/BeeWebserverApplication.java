@@ -102,7 +102,8 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO bound_coords (location) VALUES ('')");
+			// changed location data type to text from geometry for testing
+			stmt.executeUpdate("INSERT INTO bound_coords (location) VALUES ('text')");
 			ResultSet rs = stmt.executeQuery("SELECT ordinal FROM bound_coords");
 
 			ArrayList<String> output = new ArrayList<String>();
