@@ -79,7 +79,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO events (severity, instructions, type) VALUES ('extreme','flee','real bad')");
+			stmt.executeUpdate("INSERT INTO events (event_id, severity, instructions, type) VALUES ('286e06fc-b4e4-413d-9912-2d26bbf49d15','extreme','flee','real bad')");
 			ResultSet rs = stmt.executeQuery("SELECT severity FROM events");
 
 			ArrayList<String> output = new ArrayList<String>();
