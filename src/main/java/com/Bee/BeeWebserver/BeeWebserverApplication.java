@@ -79,7 +79,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO events (event_id, severity, instructions, type) VALUES ('286e06fc-b4e4-413d-9912-2d26bbf49d15','extreme','flee','real bad')");
+			stmt.executeUpdate("INSERT INTO events (severity, instructions, type) VALUES ('extreme','flee','real bad')");
 			ResultSet rs = stmt.executeQuery("SELECT severity FROM events");
 
 			ArrayList<String> output = new ArrayList<String>();
@@ -95,6 +95,32 @@ public class BeeWebserverApplication {
 			return "error lol idiot";
 		}
 	}
+
+	@GetMapping("/bound_coords")
+	String events(Map<String,Object> model){
+		String test = " ";
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("INSERT INTO bound_coords (location) VALUES ('')");
+			ResultSet rs = stmt.executeQuery("SELECT ordinal FROM bound_coords");
+
+			ArrayList<String> output = new ArrayList<String>();
+			while (rs.next()) {
+				output.add("Read from DB: " + rs.getString("ordinal"));
+				test = test + rs.getString("ordinal");
+			}
+
+			model.put("records", output);
+			return test;
+		}
+		catch(Exception e){
+			return "error lol idiot";
+		}
+	}
+
+
+
 
 	/*return relevant info
 	@GetMapping("/Return_Location")
