@@ -121,6 +121,31 @@ public class BeeWebserverApplication {
 		}
 	}
 
+		
+	@GetMapping("/evacuee")
+	String evacuee(Map<String,Object> model){
+		String d = " ";
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			// changed location data type to text from geometry for testing
+			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) 
+			VALUES ('false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','POINT(-118.4079 33.9434)','2004-10-19 10:23:54+02','Fred Flinstone')");
+			ResultSet rs = stmt.executeQuery("SELECT acknowledged FROM evacuee");
+
+			ArrayList<String> output = new ArrayList<String>();
+			while (rs.next()) {
+				output.add("Read from DB: " + rs.getString("acknowledged"));
+				d = d + rs.getString("acknowledged");
+			}
+
+			model.put("records", output);
+			return d;
+		}
+		catch(Exception e){
+			return "error lol idiot";
+		}
+	}
 
 
 
