@@ -97,7 +97,7 @@ public class BeeWebserverApplication {
 	}
 
 	@GetMapping("/bound_coords")
-	String events(Map<String,Object> model){
+	String bound_coords(Map<String,Object> model){
 		String test = " ";
 		try(Connection connection = dataSource.getConnection())
 		{
