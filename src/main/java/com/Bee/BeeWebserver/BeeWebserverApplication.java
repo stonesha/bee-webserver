@@ -131,6 +131,7 @@ public class BeeWebserverApplication {
 	}*/
 
 	//retrieves json files and parses through them
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping(path = "/Input_Location", consumes = "application/json", produces = "application/json")
 	ResponseEntity<String> Input_Locations(){
 		return new ResponseEntity<>("Success!", HttpStatus.OK);
