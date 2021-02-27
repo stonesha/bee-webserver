@@ -30,7 +30,7 @@ import java.util.Map;
 import java.sql.ResultSet;
 
 @RestController
-@CrossOrigin(origins = "https://bee-webapp.herokuapp.com/", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @SpringBootApplication
 public class BeeWebserverApplication {
 
