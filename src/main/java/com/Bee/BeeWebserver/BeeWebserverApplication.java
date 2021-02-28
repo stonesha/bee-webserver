@@ -121,14 +121,12 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	
 	@GetMapping("/evacuee")
 	String evacuee(Map<String,Object> model){
 		String d = " ";
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			// changed location data type to text from geometry for testing
 			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) VALUES ('false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','POINT(-118.4079 33.9434)','2004-10-19 10:23:54+02','Fred Flinstone')");
 			ResultSet rs = stmt.executeQuery("SELECT acknowledged FROM evacuee");
 
@@ -152,7 +150,6 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			// changed location data type to text from geometry for testing
 			stmt.executeUpdate("INSERT INTO reports (reported_at, type, info, location) VALUES ('2004-10-19 10:23:54+02','fire','its lookin real bad chief','POINT(-118.4079 33.9434)')");
 			ResultSet rs = stmt.executeQuery("SELECT type FROM reports");
 
@@ -176,14 +173,13 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			// changed location data type to text from geometry for testing
 			stmt.executeUpdate("INSERT INTO routes (status, last_update) VALUES ('inactive','2004-10-19 10:23:54+02')");
-			ResultSet rs = stmt.executeQuery("SELECT last_update FROM routes");
+			ResultSet rs = stmt.executeQuery("SELECT status FROM routes");
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
-				output.add("Read from DB: " + rs.getString("last_update"));
-				d = d + rs.getString("last_update");
+				output.add("Read from DB: " + rs.getString("status"));
+				d = d + rs.getString("status");
 			}
 
 			model.put("records", output);
@@ -194,6 +190,29 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	@GetMapping("/waypoints")
+	String waypoints(Map<String,Object> model){
+		String d = " ";
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			// in this case ordinal is considered an integer, incremented webapp-side
+			stmt.executeUpdate("INSERT INTO waypoints (checkpoint, location) VALUES ('t','POINT(-118.4079 33.9434)')");
+			ResultSet rs = stmt.executeQuery("SELECT checkpoint FROM waypoints");
+
+			ArrayList<String> output = new ArrayList<String>();
+			while (rs.next()) {
+				output.add("Read from DB: " + rs.getString("checkpoint"));
+				d = d + rs.getString("checkpoint");
+			}
+
+			model.put("records", output);
+			return d;
+		}
+		catch(Exception e){
+			return "idiot";
+		}
+	}
 	/*return relevant info
 	@GetMapping("/Return_Location")
 	String Return_Location(){
