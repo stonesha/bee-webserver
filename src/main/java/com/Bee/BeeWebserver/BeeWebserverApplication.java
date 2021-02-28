@@ -177,7 +177,7 @@ public class BeeWebserverApplication {
 		{
 			Statement stmt = connection.createStatement();
 			// changed location data type to text from geometry for testing
-			stmt.executeUpdate("INSERT INTO routes (status) VALUES ('inactive')");
+			stmt.executeUpdate("INSERT INTO routes (status, last_update) VALUES ('inactive','2004-10-19 10:23:54+02')");
 			ResultSet rs = stmt.executeQuery("SELECT last_update FROM routes");
 
 			ArrayList<String> output = new ArrayList<String>();
