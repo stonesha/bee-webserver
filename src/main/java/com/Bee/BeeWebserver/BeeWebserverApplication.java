@@ -170,7 +170,29 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	@GetMapping("/routes")
+	String reports(Map<String,Object> model){
+		String d = " ";
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			// changed location data type to text from geometry for testing
+			stmt.executeUpdate("INSERT INTO routes (status) VALUES ('inactive')");
+			ResultSet rs = stmt.executeQuery("SELECT last_update FROM routes");
 
+			ArrayList<String> output = new ArrayList<String>();
+			while (rs.next()) {
+				output.add("Read from DB: " + rs.getString("last_update"));
+				d = d + rs.getString("last_update");
+			}
+
+			model.put("records", output);
+			return d;
+		}
+		catch(Exception e){
+			return "idiot";
+		}
+	}
 
 	/*return relevant info
 	@GetMapping("/Return_Location")
