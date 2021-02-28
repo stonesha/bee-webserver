@@ -153,7 +153,7 @@ public class BeeWebserverApplication {
 		{
 			Statement stmt = connection.createStatement();
 			// changed location data type to text from geometry for testing
-			stmt.executeUpdate("INSERT INTO reports (reported_at, type, info, evac_id, location) VALUES ('2004-10-19 10:23:54+02','fire','its lookin real bad chief','POINT(-118.4079 33.9434)')");
+			stmt.executeUpdate("INSERT INTO reports (reported_at, type, info, location) VALUES ('2004-10-19 10:23:54+02','fire','its lookin real bad chief','POINT(-118.4079 33.9434)')");
 			ResultSet rs = stmt.executeQuery("SELECT type FROM reports");
 
 			ArrayList<String> output = new ArrayList<String>();
