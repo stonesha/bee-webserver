@@ -227,7 +227,6 @@ public class BeeWebserverApplication {
 			while (rs.next()) {
 				output.add("Read from DB: " + rs.getString("name"));
 				d = d + rs.getString("name");
-				");
 			}
 
 			model.put("records", output);
