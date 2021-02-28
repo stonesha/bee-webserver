@@ -213,6 +213,30 @@ public class BeeWebserverApplication {
 			return "idiot";
 		}
 	}
+
+	@GetMapping("/locations")
+	String locations(Map<String,Object> model){
+		String d = " ";
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("INSERT INTO locations (name, type, info, location) VALUES ('fred','something','something else',POINT(-118.4079 33.9434))");
+			ResultSet rs = stmt.executeQuery("SELECT name FROM locations");
+
+			ArrayList<String> output = new ArrayList<String>();
+			while (rs.next()) {
+				output.add("Read from DB: " + rs.getString("name"));
+				d = d + rs.getString("name
+				");
+			}
+
+			model.put("records", output);
+			return d;
+		}
+		catch(Exception e){
+			return "idiot";
+		}
+	}
 	/*return relevant info
 	@GetMapping("/Return_Location")
 	String Return_Location(){
