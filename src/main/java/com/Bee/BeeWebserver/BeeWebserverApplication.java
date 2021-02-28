@@ -226,7 +226,7 @@ public class BeeWebserverApplication {
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
 				output.add("Read from DB: " + rs.getString("name"));
-				d = d + rs.getString("name
+				d = d + rs.getString("name");
 				");
 			}
 
