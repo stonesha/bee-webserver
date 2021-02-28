@@ -171,7 +171,7 @@ public class BeeWebserverApplication {
 	}
 
 	@GetMapping("/routes")
-	String reports(Map<String,Object> model){
+	String routes(Map<String,Object> model){
 		String d = " ";
 		try(Connection connection = dataSource.getConnection())
 		{
