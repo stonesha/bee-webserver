@@ -121,7 +121,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
-/*		
+	
 	@GetMapping("/evacuee")
 	String evacuee(Map<String,Object> model){
 		String d = " ";
@@ -142,10 +142,10 @@ public class BeeWebserverApplication {
 			return d;
 		}
 		catch(Exception e){
-			return "error lol idiot";
+			return "idiot";
 		}
 	}
-*/
+
 
 
 	/*return relevant info
