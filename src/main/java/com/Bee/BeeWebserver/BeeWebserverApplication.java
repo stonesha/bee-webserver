@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.jbdc.core.JbdcTemplate;
+import org.springframework.web.servlet.config.annotation;
 
 //Test dependencies for database connection
 import com.zaxxer.hikari.HikariConfig;
@@ -156,7 +156,7 @@ public class BeeWebserverApplication {
 
 	//retrieves json files and parses through them
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PostMapping(path = "/Input_Location", consumes = "application/json", produces = "application/json")
+	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	ResponseEntity<String> Input_Locations(){
 		return new ResponseEntity<>("Success!", HttpStatus.OK);
 	}
