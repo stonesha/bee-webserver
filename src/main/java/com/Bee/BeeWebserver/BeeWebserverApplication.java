@@ -29,7 +29,7 @@ import java.util.Map;
 import java.sql.ResultSet;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 @SpringBootApplication
 public class BeeWebserverApplication {
 
@@ -43,11 +43,13 @@ public class BeeWebserverApplication {
 		SpringApplication.run(BeeWebserverApplication.class, args);
 	}
 
+	@CrossOrigin
 	@GetMapping("/")
 	String hello(){
 		return "Hello World";
 	}
 
+	@CrossOrigin
 	@GetMapping("/test")
 	String test(Map<String, Object> model){
 
@@ -73,6 +75,7 @@ public class BeeWebserverApplication {
 		} 
 	}
 
+	@CrossOrigin
 	@GetMapping("/events")
 	String events(Map<String,Object> model){
 		String test = " ";
@@ -96,6 +99,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	@CrossOrigin
 	@GetMapping("/bound_coords")
 	String bound_coords(Map<String,Object> model){
 		String test = " ";
@@ -120,6 +124,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	@CrossOrigin
 	@GetMapping("/evacuee")
 	String evacuee(Map<String,Object> model){
 		String d = " ";
@@ -143,6 +148,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	@CrossOrigin
 	@GetMapping("/reports")
 	String reports(Map<String,Object> model){
 		String d = " ";
@@ -166,6 +172,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	@CrossOrigin
 	@GetMapping("/routes")
 	String routes(Map<String,Object> model){
 		String d = " ";
@@ -189,6 +196,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	@CrossOrigin
 	@GetMapping("/waypoints")
 	String waypoints(Map<String,Object> model){
 		String d = " ";
@@ -213,6 +221,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	@CrossOrigin
 	@GetMapping("/locations")
 	String locations(Map<String,Object> model){
 		String d = " ";
@@ -242,7 +251,7 @@ public class BeeWebserverApplication {
 	}*/
 
 	//retrieves json files and parses through them
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	ResponseEntity<String> Input_Locations(){
 		return new ResponseEntity<>("Success!", HttpStatus.OK);
