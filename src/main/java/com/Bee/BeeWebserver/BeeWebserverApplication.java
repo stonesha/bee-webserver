@@ -267,17 +267,19 @@ public class BeeWebserverApplication {
 	//retrieves json files and parses through them
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/x-www-form-urlencoded")
-	public ResponseEntity<String> Input_Locations(@RequestBody Location test){
+	public ResponseEntity<String> Input_Locations(){
 		
-		String file = "longitude = " + test.longitude + ", lattitude = " + test.lattitude;
 
 		return new ResponseEntity<>("Success!", HttpStatus.OK);
 	}
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location_M", consumes = "application/json")
-	public ResponseEntity<String> Input_Locations_M(){
-		return new ResponseEntity<>("Sucess!", HttpStatus.OK);
+	public ResponseEntity<String> Input_Locations_M(@RequestBody Location test){
+
+		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
+
+		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
 	@Bean
