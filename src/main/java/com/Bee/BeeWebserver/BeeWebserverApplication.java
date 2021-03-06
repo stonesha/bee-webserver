@@ -1,7 +1,5 @@
 package com.Bee.BeeWebserver;
 
-import Locations.java;
-
 //basic Web application import
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,6 +29,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.sql.ResultSet;
 
+public class Locations {
+    public float longitude;
+    public float latitude;
+}
 
 @RestController
 @CrossOrigin
