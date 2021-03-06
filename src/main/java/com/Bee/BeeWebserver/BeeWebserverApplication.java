@@ -291,8 +291,4 @@ public class BeeWebserverApplication {
 	} 
 }
 
-public class Locations {
-    public float longitude;
-    public float latitude;
-}
 
