@@ -29,11 +29,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.sql.ResultSet;
 
-public class Locations {
-    public float longitude;
-    public float latitude;
-}
-
 @RestController
 @CrossOrigin
 @SpringBootApplication
@@ -296,5 +291,8 @@ public class BeeWebserverApplication {
 	} 
 }
 
-
+public class Locations {
+    public float longitude;
+    public float latitude;
+}
 
