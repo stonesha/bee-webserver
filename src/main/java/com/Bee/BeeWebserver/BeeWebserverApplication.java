@@ -258,7 +258,7 @@ public class BeeWebserverApplication {
 	}
 
 	@CrossOrigin
-	@PostMapping(path = "/Input_Location_M", conumes = "application/json")
+	@PostMapping(path = "/Input_Location_M", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations_M(){
 		return new ResponseEntity<>("Sucess!", HttpStatus.OK);
 	}
