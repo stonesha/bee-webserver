@@ -1,5 +1,7 @@
 package com.Bee.BeeWebserver;
 
+import com.Bee.Locations.java;
+
 //basic Web application import
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -291,4 +293,6 @@ public class BeeWebserverApplication {
 	} 
 }
 
+
+import com.Bee.Locations.java;
 
