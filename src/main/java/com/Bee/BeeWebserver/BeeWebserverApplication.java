@@ -269,14 +269,17 @@ public class BeeWebserverApplication {
 	@PostMapping(path = "/Input_Location", consumes = "application/x-www-form-urlencoded")
 	public ResponseEntity<String> Input_Locations(@RequestBody Location test){
 		
-		String file = "longitude = " + test.longitude + ", lattitude = " + test.lattitude;
+		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
 
 		return new ResponseEntity<>("Success!", HttpStatus.OK);
 	}
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location_M", consumes = "application/json")
-	public ResponseEntity<String> Input_Locations_M(){
+	public ResponseEntity<String> Input_Locations_M(@RequestBody Location test){
+
+		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
+
 		return new ResponseEntity<>("Sucess!", HttpStatus.OK);
 	}
 
