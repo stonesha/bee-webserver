@@ -28,6 +28,14 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.sql.ResultSet;
 
+
+//tests class to read json file
+public class Location{
+	public float longitude;
+	public float lattitude;
+}
+
+
 @RestController
 @CrossOrigin
 @SpringBootApplication
@@ -259,7 +267,10 @@ public class BeeWebserverApplication {
 	//retrieves json files and parses through them
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/x-www-form-urlencoded")
-	public ResponseEntity<String> Input_Locations(){
+	public ResponseEntity<String> Input_Locations(@RequestBody Location test){
+		
+		String file = "longitude = " + test.longitude + ", lattitude = " + test.lattitude;
+
 		return new ResponseEntity<>("Success!", HttpStatus.OK);
 	}
 
