@@ -267,9 +267,8 @@ public class BeeWebserverApplication {
 	//retrieves json files and parses through them
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/x-www-form-urlencoded")
-	public ResponseEntity<String> Input_Locations(@RequestBody Location test){
+	public ResponseEntity<String> Input_Locations(){
 		
-		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
 
 		return new ResponseEntity<>("Success!", HttpStatus.OK);
 	}
@@ -280,7 +279,7 @@ public class BeeWebserverApplication {
 
 		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
 
-		return new ResponseEntity<>("Sucess!", HttpStatus.OK);
+		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
 	@Bean
