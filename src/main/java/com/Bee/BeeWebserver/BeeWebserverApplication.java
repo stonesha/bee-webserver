@@ -29,13 +29,6 @@ import java.util.Map;
 import java.sql.ResultSet;
 
 
-//tests class to read json file
-private class Location{
-	public float longitude;
-	public float lattitude;
-}
-
-
 @RestController
 @CrossOrigin
 @SpringBootApplication
