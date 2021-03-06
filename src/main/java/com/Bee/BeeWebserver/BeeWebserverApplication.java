@@ -250,6 +250,12 @@ public class BeeWebserverApplication {
 
 	}*/
 
+	@CrossOrigin
+	@GetMapping("/Return_Location_M")
+	public ResponseEntity<String> Return_Location_M(){
+		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
+	}
+
 	//retrieves json files and parses through them
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/x-www-form-urlencoded")
