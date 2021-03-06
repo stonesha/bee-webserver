@@ -251,7 +251,7 @@ public class BeeWebserverApplication {
 	}*/
 
 	@CrossOrigin
-	@GetMapping("/Return_Location_M")
+	@GetMapping(path = "/Return_Location_M", produces = "application/json")
 	public ResponseEntity<String> Return_Location_M(){
 		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
 	}
