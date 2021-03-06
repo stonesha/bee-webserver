@@ -30,7 +30,7 @@ import java.sql.ResultSet;
 
 
 //tests class to read json file
-public class Location{
+private class Location{
 	public float longitude;
 	public float lattitude;
 }
