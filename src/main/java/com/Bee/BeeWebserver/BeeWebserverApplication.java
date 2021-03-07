@@ -1,6 +1,6 @@
 package com.Bee.BeeWebserver;
 
-import com.Bee.Locations.java;
+import com.Bee.BeeWebserver.Locations;
 
 //basic Web application import
 import org.springframework.boot.SpringApplication;
