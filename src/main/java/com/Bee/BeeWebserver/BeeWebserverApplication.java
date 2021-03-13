@@ -78,6 +78,8 @@ public class BeeWebserverApplication {
 		} 
 	}
 
+
+	// Testing for events table
 	@CrossOrigin
 	@GetMapping("/events")
 	String events(Map<String,Object> model){
@@ -102,6 +104,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	// Testing for bound_coords table
 	@CrossOrigin
 	@GetMapping("/bound_coords")
 	String bound_coords(Map<String,Object> model){
@@ -127,6 +130,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	//Testing for evacuee table
 	@CrossOrigin
 	@GetMapping("/evacuee")
 	String evacuee(Map<String,Object> model){
@@ -151,6 +155,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	// Testing for reports table
 	@CrossOrigin
 	@GetMapping("/reports")
 	String reports(Map<String,Object> model){
@@ -175,6 +180,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	// Testing for Routes table
 	@CrossOrigin
 	@GetMapping("/routes")
 	String routes(Map<String,Object> model){
@@ -199,6 +205,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	// Testing for waypoints table
 	@CrossOrigin
 	@GetMapping("/waypoints")
 	String waypoints(Map<String,Object> model){
@@ -224,6 +231,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	// Testing for locations table
 	@CrossOrigin
 	@GetMapping("/locations")
 	String locations(Map<String,Object> model){
@@ -276,6 +284,14 @@ public class BeeWebserverApplication {
 
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
+
+	// Recieving evacuee info from mobile application
+	@CrossOrigin
+	@PostMapping(path = "/get_evacuee_M", consumes = "application/json")
+	public ResponseEntity<String> Get_Evacuee_M(@RequestBody Evacuee evacuee_test){
+		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
+	}
+
 
 	@Bean
 	public DataSource dataSource() throws SQLException
