@@ -296,7 +296,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("Update evacuee (safe) VALUES ('true')");
+			stmt.executeUpdate("Update evacuee SET (safe = 'true') Where (user_id = '"+ id +"')");
 		}
 		catch(Exception e){
 			return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
