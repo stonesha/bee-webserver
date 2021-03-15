@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //dependencies for the rest controller
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -260,6 +261,46 @@ public class BeeWebserverApplication {
 	String Return_Location(){
 
 	}*/
+
+	/*
+	//general structure for editing already existing data
+	@PostMapping(path = "/NamePlaceholder/{Id}", consumes = datatype)
+	public ResponseEntity<String> functionName(@PathVariable string id, @RequestBody classtype container)
+	{
+
+	}
+	*/ 
+
+	/*
+	//general structure for requesting data of certain id
+	@GetMapping(path = "/NamePlaceholder/{id}", produces = datatype)
+	public ResponseEntity<String> functionName(@Pathvariable string id){
+
+	}
+	*/
+
+	/* 
+	//general structure of deleting data from the table
+	@DeleteMapping("/Nameplaholder/{id}")
+	public ResponseEntity<String> functionName(@Pathvariable String id){
+		
+	}
+	*/
+
+	@CrossOrigin
+	@PostMapping("/Mark_Safe_M/{id}")
+	public ResponseEntity<String> Mark_Safe(@Pathvariable String id, @RequestBody Locations test){
+		
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("Update evacuee (safe) VALUES ('true')");
+		}
+
+		String file = "Marked safe at longitude = " + test.longitude + ", latitude = " + test.latitude;
+
+		return new ResponseEntity<>(file, HttpStatus.OK);
+	}
 
 	@CrossOrigin
 	@GetMapping(path = "/Return_Location_M", produces = "application/json")
