@@ -296,7 +296,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("Update evacuee SET (safe = 'true') Where (user_id = '"+ id +"')");
+			stmt.executeUpdate("Update evacuee SET (safe = 'true') WHERE (user_id = '"+ id +"')");
 		}
 		catch(Exception e){
 			return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
@@ -306,6 +306,7 @@ public class BeeWebserverApplication {
 
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
+
 
 	@CrossOrigin
 	@GetMapping(path = "/Return_Location_M", produces = "application/json")
