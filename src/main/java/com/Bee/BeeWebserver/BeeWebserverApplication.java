@@ -297,6 +297,9 @@ public class BeeWebserverApplication {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("Update evacuee (safe) VALUES ('true')");
 		}
+		catch(Exception e){
+			return "error lol idiot";
+		}
 
 		String file = "Marked safe at longitude = " + test.longitude + ", latitude = " + test.latitude;
 
