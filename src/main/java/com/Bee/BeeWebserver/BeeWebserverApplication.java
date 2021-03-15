@@ -288,6 +288,21 @@ public class BeeWebserverApplication {
 	*/
 
 	@CrossOrigin
+	@PostMapping("/Mark_Safe_M/{id}")
+	public ResponseEntity<String> Mark_Safe(@Pathvariable String id, @RequestBody Locations test){
+		
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("Update evacuee (safe) VALUES ('true')");
+		}
+
+		String file = "Marked safe at longitude = " + test.longitude + ", latitude = " + test.latitude;
+
+		return new ResponseEntity<>(file, HttpStatus.OK);
+	}
+
+	@CrossOrigin
 	@GetMapping(path = "/Return_Location_M", produces = "application/json")
 	public ResponseEntity<String> Return_Location_M(){
 		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
