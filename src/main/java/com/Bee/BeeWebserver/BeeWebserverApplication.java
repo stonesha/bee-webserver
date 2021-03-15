@@ -289,7 +289,7 @@ public class BeeWebserverApplication {
 
 	@CrossOrigin
 	@PostMapping("/Mark_Safe_M/{id}")
-	public ResponseEntity<String> Mark_Safe(@Pathvariable String id, @RequestBody Locations test){
+	public ResponseEntity<String> Mark_Safe(@PathVariable String id, @RequestBody Locations test){
 		
 		try(Connection connection = dataSource.getConnection())
 		{
