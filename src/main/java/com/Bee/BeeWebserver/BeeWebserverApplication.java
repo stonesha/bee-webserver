@@ -299,7 +299,7 @@ public class BeeWebserverApplication {
 			stmt.executeUpdate("Update evacuee SET (safe = 'true') WHERE (user_id = '"+ id +"')");
 		}
 		catch(Exception e){
-			return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Error " + id, HttpStatus.BAD_REQUEST);
 		}
 
 		String file = "Marked safe at longitude = " + test.longitude + ", latitude = " + test.latitude;
