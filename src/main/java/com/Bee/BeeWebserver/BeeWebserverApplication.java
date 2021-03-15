@@ -288,6 +288,7 @@ public class BeeWebserverApplication {
 	}
 	*/
 
+	//attempt to mark safe when mobile app sends
 	@CrossOrigin
 	@PostMapping("/Mark_Safe_M/{id}")
 	public ResponseEntity<String> Mark_Safe(@PathVariable String id, @RequestBody Locations test){
@@ -298,7 +299,7 @@ public class BeeWebserverApplication {
 			stmt.executeUpdate("Update evacuee (safe) VALUES ('true')");
 		}
 		catch(Exception e){
-			return "error lol idiot";
+			return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
 		}
 
 		String file = "Marked safe at longitude = " + test.longitude + ", latitude = " + test.latitude;
