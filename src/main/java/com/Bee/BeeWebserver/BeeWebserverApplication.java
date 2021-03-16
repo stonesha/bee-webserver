@@ -1,6 +1,7 @@
 package com.Bee.BeeWebserver;
 
 import com.Bee.BeeWebserver.Locations;
+import com.Bee.BeeWebserver.Safe_Evac;
 
 //basic Web application import
 import org.springframework.boot.SpringApplication;
@@ -141,7 +142,7 @@ public class BeeWebserverApplication {
 		{
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) VALUES ('false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','POINT(-118.4079 33.9434)','2004-10-19 10:23:54+02','Fred Flinstone')");
-			ResultSet rs = stmt.executeQuery("SELECT acknowledged FROM evacuee");
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(safe) FROM evacuee WHERE safe = 'true'");
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
@@ -346,14 +347,30 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
+	/*
+	@CrossOrigin
+	@GetMapping(path = "/Return_Safe_Count", produces = "application/json")
+	public ResponseEntity<String> Return_Safe_Count(){
+		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
+		ResultSet rs = stmt.executeQuery("SELECT COUNT(safe) FROM evacuee WHERE safe = 'true'");
+
+		ArrayList<String> output = new ArrayList<String>();
+		while (rs.next()) {
+			output.add("Read from DB: " + rs.getString("name"));
+			d = d + rs.getString("name");
+		}
+
+		model.put("records", output);
+		return d;
+	}*/
+
 
 	@CrossOrigin
 	@GetMapping(path = "/Return_Location_M", produces = "application/json")
 	public ResponseEntity<String> Return_Location_M(){
 		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
-	}
+	}COUNT
 
-	//retrieves json files and parses through them
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/x-www-form-urlencoded")
 	public ResponseEntity<String> Input_Locations(){
@@ -377,6 +394,12 @@ public class BeeWebserverApplication {
 	public ResponseEntity<String> Get_Evacuee_M(@RequestBody Evacuee evacuee_test){
 		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
 	}
+
+	
+	
+
+	
+
 
 
 	@Bean
