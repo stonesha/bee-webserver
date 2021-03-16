@@ -1,7 +1,7 @@
 package com.Bee.BeeWebserver;
 
 import com.Bee.BeeWebserver.Locations;
-import com.Bee.BeeWebserver.Safe_Evac;
+//import com.Bee.BeeWebserver.Safe_Evac;
 
 //basic Web application import
 import org.springframework.boot.SpringApplication;
@@ -137,20 +137,20 @@ public class BeeWebserverApplication {
 	@CrossOrigin
 	@GetMapping("/evacuee")
 	String evacuee(Map<String,Object> model){
-		String d = " ";
+		String d = 0;
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) VALUES ('false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','POINT(-118.4079 33.9434)','2004-10-19 10:23:54+02','Fred Flinstone')");
 			ResultSet rs = stmt.executeQuery("SELECT COUNT(safe) FROM evacuee WHERE safe = 'true'");
 
-			ArrayList<String> output = new ArrayList<String>();
+			//ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
-				output.add("Read from DB: " + rs.getString("safe"));
-				d = d + rs.getString("safe");
+				//output.add("Read from DB: " + rs.getString("safe"));
+				d = rs.getInt(1);
 			}
 
-			model.put("records", output);
+			//model.put("records", output);
 			return d;
 		}
 		catch(Exception e){
