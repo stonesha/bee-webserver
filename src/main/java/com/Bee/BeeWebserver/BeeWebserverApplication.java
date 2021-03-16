@@ -290,7 +290,7 @@ public class BeeWebserverApplication {
 
 	//attempt to mark safe when mobile app sends
 	@CrossOrigin
-	@PostMapping("/Mark_Safe_M/{id}")
+	@PostMapping(path = "/Mark_Safe_M/{id}", consumes = "application/json")
 	public ResponseEntity<String> Mark_Safe(@PathVariable String id, @RequestBody Locations test){
 		
 		try(Connection connection = dataSource.getConnection())
@@ -303,6 +303,42 @@ public class BeeWebserverApplication {
 		}
 
 		String file = "Marked safe at longitude = " + test.longitude + ", latitude = " + test.latitude;
+
+		return new ResponseEntity<>(file, HttpStatus.OK);
+	}
+
+	/
+	//attempted function in creating a report from the mobile app
+	@CrossOrigin
+	@PostMapping(path = "/User_Report/", consumes = "application/json")
+	public ResponseEntity<String> Make_Report(@ResponsBody Reports test){
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("UPDATE evacuee SET safe = 'true' WHERE user_id = '"+ id +"'");
+		}
+		catch(Exception e){
+			return new ResponseEntity<>("Error " + id, HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<>(file, HttpStatus.OK);
+	}
+*/
+
+	@CrossOrigin
+	@PostMapping(path = "/Create_New_User_M", consumes = "application/json")
+	public ResponseEntity<String> Create_New_User(@RequestBody Evacuee test){
+
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) VALUES ('"+ test.notification_token + "', '" + test.notification_sent_at + "','" + test.acknowledged + "','" + test.acknowledged_at + "','" + test.safe + "','" + test.marked_safe_at + "','" + test.location + "','" + test.location_updated_at + "','" + test.name + "')");
+		}
+		catch(Exception e){
+			return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
+		}
+
+		String file = "this worked";
 
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
