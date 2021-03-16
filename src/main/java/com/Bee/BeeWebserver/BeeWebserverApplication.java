@@ -142,12 +142,12 @@ public class BeeWebserverApplication {
 		{
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) VALUES ('false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','POINT(-118.4079 33.9434)','2004-10-19 10:23:54+02','Fred Flinstone')");
-			ResultSet rs = stmt.executeQuery("SELECT COUNT(safe) FROM evacuee WHERE safe = 'true'");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM evacuee"); //COUNT(safe) FROM evacuee WHERE safe = 'true'");
 
 			//ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
 				//output.add("Read from DB: " + rs.getString("safe"));
-				d = rs.getInt(1);
+				d = rs.getInt("safe");
 			}
 			String z = String.valueOf(d);
 			//model.put("records", output);
