@@ -136,7 +136,7 @@ public class BeeWebserverApplication {
 	//Testing for evacuee table
 	@CrossOrigin
 	@GetMapping("/evacuee")
-	Integer evacuee(Map<String,Object> model){
+	String evacuee(Map<String,Object> model){
 		Integer d = 0;
 		try(Connection connection = dataSource.getConnection())
 		{
@@ -144,13 +144,13 @@ public class BeeWebserverApplication {
 			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) VALUES ('false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','POINT(-118.4079 33.9434)','2004-10-19 10:23:54+02','Fred Flinstone')");
 			ResultSet rs = stmt.executeQuery("SELECT safe FROM evacuee WHERE safe = 'true'");
 
-			//ArrayList<String> output = new ArrayList<String>();
+			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
-				//output.add("Read from DB: " + rs.getString("safe"));
+				output.add("Read from DB: " + rs.getString("safe"));
 				d = rs.getInt("safe");
 			}
-			String z = String.valueOf(d);
-			//model.put("records", output);
+			//String z = String.valueOf(d);
+			model.put("records", output);
 			//asdf
 			return d;
 		}
