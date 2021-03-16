@@ -337,9 +337,12 @@ public class BeeWebserverApplication {
 	@PostMapping(path = "/User_Report/", consumes = "application/json")
 	public ResponseEntity<String> Make_Report(@RequestBody Reports test){
 		try(Connection connection = dataSource.getConnection())
+
+		String loc = "POINT(" + test.latitude + " " + test.longitude + ")";
+
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO reports (reported_at, type, info, reporter_id, location) VALUES ('" + test.reported_at + "','" + test.type + "','" + test.info + "','" + test.reporter_id + "','" + test.location + "')");
+			stmt.executeUpdate("INSERT INTO reports (reported_at, type, info, reporter_id, location) VALUES ('" + test.reported_at + "','" + test.type + "','" + test.info + "','" + test.reporter_id + "','" + loc + "')");
 		}
 		catch(Exception e){
 			return new ResponseEntity<>("Error ", HttpStatus.BAD_REQUEST);
