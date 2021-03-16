@@ -145,10 +145,15 @@ public class BeeWebserverApplication {
 			ResultSet rs = stmt.executeQuery("SELECT COUNT safe FROM evacuee WHERE safe = 'true'");
 
 			ArrayList<String> output = new ArrayList<String>();
-			while (rs.next()) {
+			/*while (rs.next()) {
 				output.add("Read from DB: " + String.valueOf(rs.getString(1)));
 				d = rs.getInt(1);
-			}
+			}*/
+
+			rs.next();
+			output.add("There are: " + rs.getInt("COUNT safe") + " evacuees");
+			d = rs.getInt("COUNT safe");
+
 			//String z = String.valueOf(d);
 			model.put("records", output);
 			//asdf
