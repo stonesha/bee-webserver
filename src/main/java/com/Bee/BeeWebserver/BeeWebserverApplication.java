@@ -307,23 +307,26 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
-	/*
 	//attempted function in creating a report from the mobile app
 	@CrossOrigin
 	@PostMapping(path = "/User_Report/", consumes = "application/json")
-	public ResponseEntity<String> Make_Report(@ResponsBody Reports test){
+	public ResponseEntity<String> Make_Report(@ResponseBody Reports test){
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("UPDATE evacuee SET safe = 'true' WHERE user_id = '"+ id +"'");
+			stmt.executeUpdate("INSERT INTO reports (reported_at, type, info, location) VALUES ('" + test.reported_at + "','" + test.type + "','" + test.info + "','" + test.location + "')");
 		}
 		catch(Exception e){
-			return new ResponseEntity<>("Error " + id, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Error ", HttpStatus.BAD_REQUEST);
 		}
+
+		string file = "success";
 
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
-*/
+
+
+	//Template for processing request from mobile application to add new user
 
 	@CrossOrigin
 	@PostMapping(path = "/Create_New_User_M", consumes = "application/json")
