@@ -326,6 +326,25 @@ public class BeeWebserverApplication {
 */
 
 	@CrossOrigin
+	@PostMapping(path = "/Create_New_User_M", consumes = "application/json")
+	public ResponseEntity<String> Create_New_User(@PathVariable String id, @RequestBody Evacuee test){
+
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) VALUES (test.notification_token, test.notification_sent_at, test.acknowledged, test.acknowledged_at, test.safe, test.marked_safe_at, test.location, test.location_updated_at, test.name)");
+		}
+		catch(Exception e){
+			return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
+		}
+
+		String file = "this worked";
+
+		return new ResponseEntity<>(file, HttpStatus.OK);
+	}
+
+
+	@CrossOrigin
 	@GetMapping(path = "/Return_Location_M", produces = "application/json")
 	public ResponseEntity<String> Return_Location_M(){
 		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
