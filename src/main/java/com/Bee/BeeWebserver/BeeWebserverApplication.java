@@ -290,7 +290,7 @@ public class BeeWebserverApplication {
 
 	//attempt to mark safe when mobile app sends
 	@CrossOrigin
-	@PostMapping("/Mark_Safe_M/{id}")
+	@PostMapping(path = "/Mark_Safe_M/{id}", consumes = "application/json")
 	public ResponseEntity<String> Mark_Safe(@PathVariable String id, @RequestBody Locations test){
 		
 		try(Connection connection = dataSource.getConnection())
@@ -307,6 +307,23 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
+	/*
+	//attempted function in creating a report from the mobile app
+	@CrossOrigin
+	@PostMapping(path = "/User_Report/", consumes = "application/json")
+	public ResponseEntity<String> Make_Report(@ResponsBody Reports test){
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("UPDATE evacuee SET safe = 'true' WHERE user_id = '"+ id +"'");
+		}
+		catch(Exception e){
+			return new ResponseEntity<>("Error " + id, HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<>(file, HttpStatus.OK);
+	}
+*/
 
 	@CrossOrigin
 	@GetMapping(path = "/Return_Location_M", produces = "application/json")
