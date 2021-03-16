@@ -314,6 +314,24 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
+	@CrossOrigin
+	@PostMapping(path = "/Mark_Not_Safe_M/{id}", consumes = "application/json")
+	public ResponseEntity<String> Mark_Not_Safe(@PathVariable String id, @RequestBody Locations test){
+		
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("UPDATE evacuee SET safe = 'false' WHERE user_id = '"+ id +"'");
+		}
+		catch(Exception e){
+			return new ResponseEntity<>("Error " + id, HttpStatus.BAD_REQUEST);
+		}
+
+		String file = "Marked not safe at longitude = " + test.longitude + ", latitude = " + test.latitude;
+
+		return new ResponseEntity<>(file, HttpStatus.OK);
+	}
+
 	//attempted function in creating a report from the mobile app
 	@CrossOrigin
 	@PostMapping(path = "/User_Report/", consumes = "application/json")
