@@ -136,7 +136,7 @@ public class BeeWebserverApplication {
 	//Testing for evacuee table
 	@CrossOrigin
 	@GetMapping("/evacuee")
-	String evacuee(Map<String,Object> model){
+	Integer evacuee(Map<String,Object> model){
 		Integer d = 0;
 		try(Connection connection = dataSource.getConnection())
 		{
@@ -151,10 +151,10 @@ public class BeeWebserverApplication {
 			}
 			String z = String.valueOf(d);
 			//model.put("records", output);
-			return z;
+			return d;
 		}
 		catch(Exception e){
-			return "idiot";
+			return 6969;
 		}
 	}
 
