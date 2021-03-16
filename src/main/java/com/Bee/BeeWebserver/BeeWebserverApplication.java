@@ -307,7 +307,7 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
-	/*
+	/
 	//attempted function in creating a report from the mobile app
 	@CrossOrigin
 	@PostMapping(path = "/User_Report/", consumes = "application/json")
@@ -327,12 +327,12 @@ public class BeeWebserverApplication {
 
 	@CrossOrigin
 	@PostMapping(path = "/Create_New_User_M", consumes = "application/json")
-	public ResponseEntity<String> Create_New_User(@PathVariable String id, @RequestBody Evacuee test){
+	public ResponseEntity<String> Create_New_User(@RequestBody Evacuee test){
 
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) VALUES (test.notification_token, test.notification_sent_at, test.acknowledged, test.acknowledged_at, test.safe, test.marked_safe_at, test.location, test.location_updated_at, test.name)");
+			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) VALUES ('"+ test.notification_token + "', '" + test.notification_sent_at + "','" + test.acknowledged + "','" + test.acknowledged_at + "','" + test.safe + "','" + test.marked_safe_at + "','" + test.location + "','" + test.location_updated_at + "','" + test.name + "')");
 		}
 		catch(Exception e){
 			return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
