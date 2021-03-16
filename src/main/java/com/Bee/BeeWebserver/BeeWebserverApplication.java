@@ -151,8 +151,8 @@ public class BeeWebserverApplication {
 			}*/
 
 			rs.next();
-			output.add("There are: " + rs.getInt("COUNT safe") + " evacuees");
-			d = rs.getInt("COUNT safe");
+			output.add("There are: " + rs.getInt("COUNT") + " evacuees");
+			d = rs.getInt("COUNT");
 
 			//String z = String.valueOf(d);
 			model.put("records", output);
