@@ -310,17 +310,17 @@ public class BeeWebserverApplication {
 	//attempted function in creating a report from the mobile app
 	@CrossOrigin
 	@PostMapping(path = "/User_Report/", consumes = "application/json")
-	public ResponseEntity<String> Make_Report(@ResponseBody Reports test){
+	public ResponseEntity<String> Make_Report(@RequestBody Reports test){
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO reports (reported_at, type, info, location) VALUES ('" + test.reported_at + "','" + test.type + "','" + test.info + "','" + test.location + "')");
+			stmt.executeUpdate("INSERT INTO reports (reported_at, type, info, reporter_id, location) VALUES ('" + test.reported_at + "','" + test.type + "','" + test.info + "','" + test.reporter_id + "','" + test.location + "')");
 		}
 		catch(Exception e){
 			return new ResponseEntity<>("Error ", HttpStatus.BAD_REQUEST);
 		}
 
-		string file = "success";
+		String file = "success";
 
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
