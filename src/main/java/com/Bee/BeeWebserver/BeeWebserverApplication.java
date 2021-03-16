@@ -307,7 +307,7 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
-	/
+	/*
 	//attempted function in creating a report from the mobile app
 	@CrossOrigin
 	@PostMapping(path = "/User_Report/", consumes = "application/json")
