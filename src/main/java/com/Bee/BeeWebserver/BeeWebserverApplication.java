@@ -369,7 +369,7 @@ public class BeeWebserverApplication {
 	@GetMapping(path = "/Return_Location_M", produces = "application/json")
 	public ResponseEntity<String> Return_Location_M(){
 		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
-	}COUNT
+	}
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/x-www-form-urlencoded")
