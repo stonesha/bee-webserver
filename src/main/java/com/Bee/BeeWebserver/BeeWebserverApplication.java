@@ -336,10 +336,10 @@ public class BeeWebserverApplication {
 	@CrossOrigin
 	@PostMapping(path = "/User_Report/", consumes = "application/json")
 	public ResponseEntity<String> Make_Report(@RequestBody Reports test){
-		try(Connection connection = dataSource.getConnection())
-
+		
 		String loc = "POINT(" + test.latitude + " " + test.longitude + ")";
-
+		
+		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("INSERT INTO reports (reported_at, type, info, reporter_id, location) VALUES ('" + test.reported_at + "','" + test.type + "','" + test.info + "','" + test.reporter_id + "','" + loc + "')");
