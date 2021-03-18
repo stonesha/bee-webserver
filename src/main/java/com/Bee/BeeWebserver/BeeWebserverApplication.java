@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import javax.sql.DataSource;
 
+//Imports for sql statement calls. 
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -142,7 +143,7 @@ public class BeeWebserverApplication {
 		{
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("INSERT INTO evacuee (notification_token, notification_sent_at, acknowledged, acknowledged_at, safe, marked_safe_at, location, location_updated_at, name) VALUES ('false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','false','2004-10-19 10:23:54+02','POINT(-118.4079 33.9434)','2004-10-19 10:23:54+02','Fred Flinstone')");
-			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM evacuee WHERE safe = 'true'");
+			ResultSet rs = stmt.executeQuery("SELECT COUNT 'safe AS total FROM evacuee WHERE safe = 'true'");
 
 			ArrayList<String> output = new ArrayList<String>();
 			/*while (rs.next()) {
@@ -151,8 +152,8 @@ public class BeeWebserverApplication {
 			}*/
 
 			rs.next();
-			output.add("There are: " + rs.getInt("COUNT(*)") + " evacuees");
-			d = rs.getInt("COUNT(*)");
+			output.add("There are: " + rs.getInt("total") + " evacuees");
+			d = rs.getInt("total");
 
 			//String z = String.valueOf(d);
 			model.put("records", output);
@@ -336,9 +337,9 @@ public class BeeWebserverApplication {
 	@CrossOrigin
 	@PostMapping(path = "/User_Report/", consumes = "application/json")
 	public ResponseEntity<String> Make_Report(@RequestBody Reports test){
-		
+
 		String loc = "POINT(" + test.latitude + " " + test.longitude + ")";
-		
+
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
