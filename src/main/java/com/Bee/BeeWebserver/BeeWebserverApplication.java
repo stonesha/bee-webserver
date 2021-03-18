@@ -151,9 +151,11 @@ public class BeeWebserverApplication {
 				d = rs.getInt(1);
 			}*/
 
-			rs.next();
-			output.add("There are: " + rs.getInt("total") + " evacuees");
-			d = rs.getInt("total");
+			while (rs.next()){
+				output.add("There are: " + rs.getInt("total") + " evacuees");
+				d = rs.getInt("total");
+			}
+
 
 			//String z = String.valueOf(d);
 			model.put("records", output);
