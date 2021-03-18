@@ -163,7 +163,7 @@ public class BeeWebserverApplication {
 			return String.valueOf(d);
 		}
 		catch(Exception e){
-			return e;
+			return e.toString();
 		}
 	}
 
