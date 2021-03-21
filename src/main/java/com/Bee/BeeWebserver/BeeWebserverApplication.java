@@ -421,7 +421,7 @@ public class BeeWebserverApplication {
 	}
 
 	@CrossOrigin
-	@PostMapping(path = "/Input_Location", consumes = "application/x-www-form-urlencoded")
+	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations(){
 		
 
