@@ -427,7 +427,7 @@ public class BeeWebserverApplication {
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
-	public ResponseEntity<String> Input_Locations(){
+	public ResponseEntity<String> Input_Locations(@RequestBody String featuresString){
 		/*
 		Gson featuresGson = new Gson();
 		
@@ -437,7 +437,7 @@ public class BeeWebserverApplication {
 		String coordinates = featuresObject.get("coordinates").getAsString();
 		*/
 
-		return new ResponseEntity<>("Success", HttpStatus.OK);
+		return new ResponseEntity<>(featuresString, HttpStatus.OK);
 	}
 
 	@CrossOrigin
