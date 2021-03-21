@@ -1,6 +1,7 @@
 package com.Bee.BeeWebserver;
 
 import com.Bee.BeeWebserver.Locations;
+import com.Bee.BeeWebserver.Feature;
 //import com.Bee.BeeWebserver.Safe_Evac;
 
 //basic Web application import
@@ -427,7 +428,7 @@ public class BeeWebserverApplication {
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location")
-	public ResponseEntity<String> Input_Locations(@RequestBody String featuresString){
+	public ResponseEntity<String> Input_Locations(@RequestBody Feature featuresString){
 		/*
 		Gson featuresGson = new Gson();
 		
