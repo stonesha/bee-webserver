@@ -420,8 +420,8 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
 	}
 
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@PostMapping(path = "/Input_Location", consumes = "application/json")
+	@CrossOrigin
+	@PostMapping(path = "/Input_Location")
 	public ResponseEntity<String> Input_Locations(){
 		
 
