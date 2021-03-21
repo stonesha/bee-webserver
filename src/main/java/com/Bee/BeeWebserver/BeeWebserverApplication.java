@@ -426,7 +426,7 @@ public class BeeWebserverApplication {
 	}
 
 	@CrossOrigin
-	@PostMapping(path = "/Input_Location")
+	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
 		/*
 		Gson featuresGson = new Gson();
