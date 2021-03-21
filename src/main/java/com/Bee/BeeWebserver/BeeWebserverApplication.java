@@ -429,7 +429,7 @@ public class BeeWebserverApplication {
 	}
 
 	@CrossOrigin
-	@PostMapping(path = "/Input_Location_M", consumes = "application/json", headers = "origin=https://bee-webapp.herokuapp.com/")
+	@PostMapping(path = "/Input_Location_M", consumes = "application/json", headers = "Access-Control-Allow-Origin=*")
 	public ResponseEntity<String> Input_Locations_M(@RequestBody Locations test){
 
 		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
