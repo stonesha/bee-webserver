@@ -378,20 +378,39 @@ public class BeeWebserverApplication {
 	}
 
 	/*
+	//Setting up the Get request for returning the safe count to the web application
 	@CrossOrigin
 	@GetMapping(path = "/Return_Safe_Count", produces = "application/json")
 	public ResponseEntity<String> Return_Safe_Count(){
-		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
-		ResultSet rs = stmt.executeQuery("SELECT COUNT(safe) FROM evacuee WHERE safe = 'true'");
+		//might want to change the response entity to the class container maybe?
 
-		ArrayList<String> output = new ArrayList<String>();
-		while (rs.next()) {
-			output.add("Read from DB: " + rs.getString("name"));
-			d = d + rs.getString("name");
+		integer total = 0;
+		integer safe = 0;
+
+		try(Connection connection = dataSource.getConnection())
+		{
+			return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM evacuee WHERE safe = 'true'");
+			ResultSet rs2 = stmt.executeQuery("SELECT COUNT(*) FROM evacuee");
+
+			while (rs.next()) {
+				safe = rs.getInt(1);
+			}
+
+			while (rs2.next()) {
+				total = rs2.getInt(2);
+			}
+
+			String count = String.valueOf(safe) + "/" + String.valueOf(total);
+
+			return new ResponseEntity<>(count, HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
 
-		model.put("records", output);
-		return d;
+
 	}*/
 
 
@@ -402,7 +421,7 @@ public class BeeWebserverApplication {
 	}
 
 	@CrossOrigin
-	@PostMapping(path = "/Input_Location", consumes = "application/x-www-form-urlencoded")
+	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations(){
 		
 
