@@ -437,7 +437,7 @@ public class BeeWebserverApplication {
 		String coordinates = featuresObject.get("coordinates").getAsString();
 		*/
 
-		return new ResponseEntity<>("Type: " + feature.type, HttpStatus.OK);
+		return new ResponseEntity<>("Success", HttpStatus.OK);
 	}
 
 	@CrossOrigin
