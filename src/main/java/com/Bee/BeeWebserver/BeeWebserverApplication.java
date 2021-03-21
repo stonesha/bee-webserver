@@ -36,7 +36,7 @@ import java.util.Map;
 import java.sql.ResultSet;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @SpringBootApplication
 public class BeeWebserverApplication {
 
