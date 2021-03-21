@@ -35,6 +35,11 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.sql.ResultSet;
 
+//dependencies for parsing JSON
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @SpringBootApplication
@@ -422,10 +427,15 @@ public class BeeWebserverApplication {
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location")
-	public ResponseEntity<String> Input_Locations(){
+	public ResponseEntity<String> Input_Locations(@RequestBody String featuresString){
+		Gson featuresGson = new Gson();
 		
+		//get json object from json string
+		JsonObject featuresObject = features.fromJson(featuresString, JsonObject.class);
+		String type = featuresObject.get("type").getAsString();
+		String coordinates = featuresObject.get("coordinates").getAsString();
 
-		return new ResponseEntity<>("Success!", HttpStatus.OK);
+		return new ResponseEntity<>("Type: " + type + " Coordinates: " + coordinates, HttpStatus.OK);
 	}
 
 	@CrossOrigin
