@@ -1,7 +1,6 @@
 package com.Bee.BeeWebserver;
 
 import com.Bee.BeeWebserver.Locations;
-import com.Bee.BeeWebserver.Feature;
 //import com.Bee.BeeWebserver.Safe_Evac;
 
 //basic Web application import
