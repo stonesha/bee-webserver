@@ -428,14 +428,16 @@ public class BeeWebserverApplication {
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location")
 	public ResponseEntity<String> Input_Locations(@RequestBody String featuresString){
+		/*
 		Gson featuresGson = new Gson();
 		
 		//get json object from json string
 		JsonObject featuresObject = featuresGson.fromJson(featuresString, JsonObject.class);
 		String type = featuresObject.get("type").getAsString();
 		String coordinates = featuresObject.get("coordinates").getAsString();
+		*/
 
-		return new ResponseEntity<>("Type: " + type + " Coordinates: " + coordinates, HttpStatus.OK);
+		return new ResponseEntity<>(featuresString, HttpStatus.OK);
 	}
 
 	@CrossOrigin
