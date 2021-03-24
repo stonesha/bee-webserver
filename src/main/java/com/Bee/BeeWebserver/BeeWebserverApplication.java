@@ -35,8 +35,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.sql.ResultSet;
 
+//dependencies for parsing JSON
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @SpringBootApplication
 public class BeeWebserverApplication {
 
@@ -422,14 +427,21 @@ public class BeeWebserverApplication {
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
-	public ResponseEntity<String> Input_Locations(){
+	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
+		/*
+		Gson featuresGson = new Gson();
 		
+		//get json object from json string
+		JsonObject featuresObject = featuresGson.fromJson(featuresString, JsonObject.class);
+		String type = featuresObject.get("type").getAsString();
+		String coordinates = featuresObject.get("coordinates").getAsString();
+		*/
 
-		return new ResponseEntity<>("Success!", HttpStatus.OK);
+		return new ResponseEntity<>("Type: " + feature.type + "Coordinates: " + feature.coordinates, HttpStatus.OK);
 	}
 
 	@CrossOrigin
-	@PostMapping(path = "/Input_Location_M", consumes = "application/json")
+	@PostMapping(path = "/Input_Location_M", consumes = "application/json", headers = "Access-Control-Allow-Origin=*")
 	public ResponseEntity<String> Input_Locations_M(@RequestBody Locations test){
 
 		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
