@@ -5,5 +5,5 @@ import java.util.*;
 public class Feature{
 
     public String type;
-    public double[][] coordinates;
+    public double[][][] coordinates;
 }
