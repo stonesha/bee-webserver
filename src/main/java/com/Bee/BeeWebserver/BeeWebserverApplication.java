@@ -438,11 +438,6 @@ public class BeeWebserverApplication {
 		String coordinates = featuresObject.get("coordinates").getAsString();
 		*/
 
-		//Trying a different method
-		Gson featuresGson = new Gson();
-		Feature test = featuresGson.fromJson(feature, Feature.class);
-
-
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 
