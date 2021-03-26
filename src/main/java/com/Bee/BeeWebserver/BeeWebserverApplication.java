@@ -439,7 +439,8 @@ public class BeeWebserverApplication {
 		*/
 
 		//Trying a different method
-		Feature test = gson.fromJson(feature, Feature.class);
+		Gson featuresGson = new Gson();
+		Feature test = featuresGson.fromJson(feature, Feature.class);
 
 
 		return new ResponseEntity<>("success", HttpStatus.OK);
