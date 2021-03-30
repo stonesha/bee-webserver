@@ -429,14 +429,18 @@ public class BeeWebserverApplication {
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
-		/*
-		Gson featuresGson = new Gson();
-		
-		//get json object from json string
-		JsonObject featuresObject = featuresGson.fromJson(featuresString, JsonObject.class);
-		String type = featuresObject.get("type").getAsString();
-		String coordinates = featuresObject.get("coordinates").getAsString();
-		*/
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			for(int i = 0; i < feature.coordinates[0][i].length ; i++)
+			{
+				String loc = "POINT(" + String.valueOf(feature.coordinates[0][i][0]) + " " + String.valueOf(feature.coordinates[0][i][1]) + ")";
+				stmt.executeUpdate("INSERT INTO bound_coords (type, location) VALUES ('"+ feature.type +"'', '"+ loc +"'')");
+			}
+		}
+		catch(Exception e){
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
