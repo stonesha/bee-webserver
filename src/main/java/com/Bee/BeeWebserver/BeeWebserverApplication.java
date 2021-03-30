@@ -430,7 +430,7 @@ public class BeeWebserverApplication {
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
 
-		String test;
+		String test= " ";
 
 		try(Connection connection = dataSource.getConnection())
 		{
