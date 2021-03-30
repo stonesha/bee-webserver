@@ -437,7 +437,7 @@ public class BeeWebserverApplication {
 			Statement stmt = connection.createStatement();
 			for(int i = 0; i < feature.coordinates[0].length ; i++)
 			{
-				String loc = "SRID=4326;POINT(" + String.valueOf(feature.coordinates[0][i][1]) + " " + String.valueOf(feature.coordinates[0][i][0]) + ")";
+				String loc = "SRID=4326;POINT(" + String.valueOf(feature.coordinates[0][i][0]) + " " + String.valueOf(feature.coordinates[0][i][1]) + ")";
 				stmt.executeUpdate("INSERT INTO bound_coords (type, location) VALUES ('"+ feature.type +"', '"+ loc +"')");
 				test = loc;
 			}
