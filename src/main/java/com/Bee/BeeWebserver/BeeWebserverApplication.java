@@ -449,6 +449,17 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>("success" + test, HttpStatus.OK);
 	}
 
+	// Sending zone data to Web Application
+	@CrossOrigin
+	@GetMapping(path = "/Send_Zone_to_WA", produces = "application/json"){
+		//SQL query to get zone data from database
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			
+		}
+	}
+
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location_M", consumes = "application/json", headers = "Access-Control-Allow-Origin=*")
 	public ResponseEntity<String> Input_Locations_M(@RequestBody Locations test){
