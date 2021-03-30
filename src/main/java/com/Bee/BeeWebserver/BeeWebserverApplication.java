@@ -346,7 +346,7 @@ public class BeeWebserverApplication {
 	@PostMapping(path = "/User_Report/", consumes = "application/json")
 	public ResponseEntity<String> Make_Report(@RequestBody Reports test){
 
-		String loc = "POINT(" + test.latitude + " " + test.longitude + ")";
+		String loc = "SRID=4326;POINT(" + test.latitude + " " + test.longitude + ")";
 
 		try(Connection connection = dataSource.getConnection())
 		{
@@ -435,7 +435,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			for(int i = 0; i < feature.coordinates[0].length ; i++)
+			for(int i = 0; i < feature.coordinates[0].length-1 ; i++)
 			{
 				String loc = "SRID=4326;POINT(" + String.valueOf(feature.coordinates[0][i][0]) + " " + String.valueOf(feature.coordinates[0][i][1]) + ")";
 				stmt.executeUpdate("INSERT INTO bound_coords (type, location) VALUES ('"+ feature.type +"', '"+ loc +"')");
