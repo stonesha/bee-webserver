@@ -435,7 +435,7 @@ public class BeeWebserverApplication {
 			for(int i = 0; i < feature.coordinates[0][i].length ; i++)
 			{
 				String loc = "POINT(" + String.valueOf(feature.coordinates[0][i][0]) + " " + String.valueOf(feature.coordinates[0][i][1]) + ")";
-				stmt.executeUpdate("INSERT INTO bound_coords (type, location) VALUES ('"+ feature.type +"'', '"+ loc +"'')");
+				stmt.executeUpdate("INSERT INTO bound_coords (type, location) VALUES ('"+ feature.type +"'', '"+ loc +"')");
 			}
 		}
 		catch(Exception e){
