@@ -442,7 +442,7 @@ public class BeeWebserverApplication {
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}*/
 
-		return new ResponseEntity<>("success" + String.valueOf(feature.coordinates[0][0]), HttpStatus.OK);
+		return new ResponseEntity<>("success" + String.valueOf(feature.coordinates[0][1]), HttpStatus.OK);
 	}
 
 	@CrossOrigin
