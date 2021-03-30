@@ -428,7 +428,10 @@ public class BeeWebserverApplication {
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
-	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){		
+	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
+
+		String test;
+
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
@@ -436,13 +439,14 @@ public class BeeWebserverApplication {
 			{
 				String loc = "SRID=4326;POINT(" + String.valueOf(feature.coordinates[0][i][1]) + " " + String.valueOf(feature.coordinates[0][i][0]) + ")";
 				stmt.executeUpdate("INSERT INTO bound_coords (type, location) VALUES ('"+ feature.type +"', '"+ loc +"')");
+				test = loc;
 			}
 		}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
 
-		return new ResponseEntity<>("success" + loc, HttpStatus.OK);
+		return new ResponseEntity<>("success" + test, HttpStatus.OK);
 	}
 
 	@CrossOrigin
