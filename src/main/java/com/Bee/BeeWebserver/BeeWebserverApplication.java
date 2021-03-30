@@ -439,10 +439,10 @@ public class BeeWebserverApplication {
 			}
 		}
 		catch(Exception e){
-			return new ResponseEntity<>(e.toString() + String.valueOf(feature.coordinates[0][0].length), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
 
-		return new ResponseEntity<>("success", HttpStatus.OK);
+		return new ResponseEntity<>("success" + String.valueOf(feature.coordinates[0][0].length), HttpStatus.OK);
 	}
 
 	@CrossOrigin
