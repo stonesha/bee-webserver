@@ -429,7 +429,7 @@ public class BeeWebserverApplication {
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
-		try(Connection connection = dataSource.getConnection())
+		/*try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
 			for(int i = 0; i < feature.coordinates[0].length ; i++)
@@ -440,9 +440,9 @@ public class BeeWebserverApplication {
 		}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
-		}
+		}*/
 
-		return new ResponseEntity<>("success" + String.valueOf(feature.coordinates[0][0][0]), HttpStatus.OK);
+		return new ResponseEntity<>("success" + String.valueOf(feature.coordinates[0][0][0]) + " " + String.valueOf(feature.coordinates[0][0][1]), HttpStatus.OK);
 	}
 
 	@CrossOrigin
