@@ -470,8 +470,8 @@ public class BeeWebserverApplication {
 				d = d + rs.getString("bound_coord_id");
 			}
 
-			model.put("records", output);
-			return d;
+			//model.put("records", output);
+			return new ResponseEntity<>("success" + d, HttpStatus.OK);
 		}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
