@@ -474,7 +474,7 @@ public class BeeWebserverApplication {
 			String e = gson.toJson(d);
 
 			//model.put("records", output);
-			return new ResponseEntity<>("success" + e, HttpStatus.OK);
+			return new ResponseEntity<>(e, HttpStatus.OK);
 		}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
