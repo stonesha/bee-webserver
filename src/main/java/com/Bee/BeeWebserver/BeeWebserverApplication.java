@@ -454,8 +454,8 @@ public class BeeWebserverApplication {
 
 	// Sending zone data to Web Application
 	@CrossOrigin
-	@GetMapping(path = "/Send_Zone_to_WA", produces = "application/json"){
-	public ResponseEntity<String> Send_Zone_to_WA(@)
+	@GetMapping(path = "/Send_Zone_to_WA", produces = "application/json")
+	public ResponseEntity<String> Send_Zone_to_WA(){
 		//SQL query to get zone data from database
 		String d = " ";
 		try(Connection connection = dataSource.getConnection())
