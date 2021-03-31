@@ -462,7 +462,7 @@ public class BeeWebserverApplication {
 		{
 			Statement stmt = connection.createStatement();
 			
-			Resultset rs = stmt.executeQuery("SELECT * FROM bound_coords WHERE bound_coord_id = '09ad2e75-c5d7-4142-b680-280646ffbb01'");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM bound_coords WHERE bound_coord_id = '09ad2e75-c5d7-4142-b680-280646ffbb01'");
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
