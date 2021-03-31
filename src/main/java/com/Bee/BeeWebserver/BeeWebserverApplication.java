@@ -453,17 +453,30 @@ public class BeeWebserverApplication {
 
 
 	// Sending zone data to Web Application
-	/*@CrossOrigin
+	@CrossOrigin
 	@GetMapping(path = "/Send_Zone_to_WA", produces = "application/json"){
 	public ResponseEntity<String> Send_Zone_to_WA(@)
 		//SQL query to get zone data from database
+		String d = " ";
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
 			
-			stmt.executeQuery("SELECT * FROM bound_coords WHERE bound_coord_id = '09ad2e75-c5d7-4142-b680-280646ffbb01'");
+			Resultset rs = stmt.executeQuery("SELECT * FROM bound_coords WHERE bound_coord_id = '09ad2e75-c5d7-4142-b680-280646ffbb01'");
+
+			ArrayList<String> output = new ArrayList<String>();
+			while (rs.next()) {
+				output.add("Read from DB: " + rs.getString("bound_coord_id"));
+				d = d + rs.getString("bound_coord_id");
+			}
+
+			model.put("records", output);
+			return d;
 		}
-	}*/
+		catch(Exception e){
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location_M", consumes = "application/json", headers = "Access-Control-Allow-Origin=*")
