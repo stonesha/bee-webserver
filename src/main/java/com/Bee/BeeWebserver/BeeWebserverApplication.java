@@ -470,8 +470,11 @@ public class BeeWebserverApplication {
 				d = d + rs.getString("bound_coord_id");
 			}
 
+			Gson gson = new Gson();
+			String e = gson.toJson(d);
+
 			//model.put("records", output);
-			return new ResponseEntity<>("success" + d, HttpStatus.OK);
+			return new ResponseEntity<>("success" + e, HttpStatus.OK);
 		}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
