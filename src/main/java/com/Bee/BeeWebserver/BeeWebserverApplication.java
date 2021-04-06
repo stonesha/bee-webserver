@@ -419,11 +419,7 @@ public class BeeWebserverApplication {
 
 	}*/
 
-	@CrossOrigin
-	@GetMapping(path = "/Return_Location_M", produces = "application/json")
-	public ResponseEntity<String> Return_Location_M(){
-		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
-	}
+
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
@@ -446,6 +442,22 @@ public class BeeWebserverApplication {
 		}
 
 		return new ResponseEntity<>("success" + test, HttpStatus.OK);
+	}
+
+	@CrossOrigin
+	@PostMapping(path = "/Input_Location_M", consumes = "application/json")
+	public ResponseEntity<String> Input_Locations_M(@RequestBody Locations test){
+
+		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
+
+		return new ResponseEntity<>(file, HttpStatus.OK);
+	}
+
+	// Recieving evacuee info from mobile application
+	@CrossOrigin
+	@PostMapping(path = "/get_evacuee_M", consumes = "application/json")
+	public ResponseEntity<String> Get_Evacuee_M(@RequestBody Evacuee evacuee_test){
+		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
 	}
 
 	// Sending zone data to Web Application
@@ -478,21 +490,10 @@ public class BeeWebserverApplication {
 	}
 
 	@CrossOrigin
-	@PostMapping(path = "/Input_Location_M", consumes = "application/json", headers = "Access-Control-Allow-Origin=*")
-	public ResponseEntity<String> Input_Locations_M(@RequestBody Locations test){
-
-		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
-
-		return new ResponseEntity<>(file, HttpStatus.OK);
-	}
-
-	// Recieving evacuee info from mobile application
-	@CrossOrigin
-	@PostMapping(path = "/get_evacuee_M", consumes = "application/json")
-	public ResponseEntity<String> Get_Evacuee_M(@RequestBody Evacuee evacuee_test){
+	@GetMapping(path = "/Return_Location_M", produces = "application/json")
+	public ResponseEntity<String> Return_Location_M(){
 		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
 	}
-
 	
 	@Bean
 	public DataSource dataSource() throws SQLException
