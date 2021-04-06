@@ -343,7 +343,7 @@ public class BeeWebserverApplication {
 
 	//attempted function in creating a report from the mobile app
 	@CrossOrigin
-	@PostMapping(path = "/User_Report/", consumes = "application/json")
+	@PostMapping(path = "/User_Report", consumes = "application/json")
 	public ResponseEntity<String> Make_Report(@RequestBody Reports test){
 
 		String loc = "SRID=4326;POINT(" + test.latitude + " " + test.longitude + ")";
