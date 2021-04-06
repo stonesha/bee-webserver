@@ -419,7 +419,6 @@ public class BeeWebserverApplication {
 
 	}*/
 
-
 	@CrossOrigin
 	@GetMapping(path = "/Return_Location_M", produces = "application/json")
 	public ResponseEntity<String> Return_Location_M(){
@@ -448,9 +447,6 @@ public class BeeWebserverApplication {
 
 		return new ResponseEntity<>("success" + test, HttpStatus.OK);
 	}
-
-
-
 
 	// Sending zone data to Web Application
 	@CrossOrigin
@@ -498,12 +494,6 @@ public class BeeWebserverApplication {
 	}
 
 	
-	
-
-	
-
-
-
 	@Bean
 	public DataSource dataSource() throws SQLException
 	{
