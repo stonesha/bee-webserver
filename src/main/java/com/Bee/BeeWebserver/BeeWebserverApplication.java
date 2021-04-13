@@ -427,19 +427,52 @@ public class BeeWebserverApplication {
 
 		String test= " ";
 
-		try(Connection connection = dataSource.getConnection())
+		if(feature.type == "zone")
 		{
-			Statement stmt = connection.createStatement();
-			for(int i = 0; i < feature.coordinates[0].length-1 ; i++)
+			try(Connection connection = dataSource.getConnection())
 			{
-				String loc = "SRID=4326;POINT(" + String.valueOf(feature.coordinates[0][i][0]) + " " + String.valueOf(feature.coordinates[0][i][1]) + ")";
-				stmt.executeUpdate("INSERT INTO bound_coords (type, location) VALUES ('"+ feature.type +"', '"+ loc +"')");
-				test = loc;
+				Statement stmt = connection.createStatement();
+				for(int i = 0; i < feature.coordinates[0].length-1 ; i++)
+				{
+					String loc = "SRID=4326;POINT(" + String.valueOf(feature.coordinates[0][i][0]) + " " + String.valueOf(feature.coordinates[0][i][1]) + ")";
+					stmt.executeUpdate("INSERT INTO bound_coords (type, location) VALUES ('"+ feature.type +"', '"+ loc +"')");
+					test = loc;
+				}
+			}
+			catch(Exception e){
+				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
 		}
-		catch(Exception e){
-			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		else if(feature.type == "line")
+		{
+			try(Connection connection = dataSource.getConnection())
+			{
+
+			}
+			catch(Exception e)
+			{
+				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+			}
 		}
+		else if(feature.type == "mark")
+		{
+			try(Connection connection = dataSource.getConnection())
+			{
+				Statement stmt = connection.createStatement();
+				for(int i = 0; i < feature.coordinates[0].length-1 ; i++)
+				{
+					String loc = "SRID=4326;POINT(" + String.valueOf(feature.coordinates[0][i][0]) + " " + String.valueOf(feature.coordinates[0][i][1]) + ")";
+					stmt.executeUpdate("INSERT INTO locations (type, location) VALUES ('"+ feature.type +"', '"+ loc +"')");
+					test = loc;
+				}
+			}
+			catch(Exception e)
+			{
+				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+			}
+		}
+
+
 
 		return new ResponseEntity<>("success" + test, HttpStatus.OK);
 	}
@@ -449,6 +482,17 @@ public class BeeWebserverApplication {
 	public ResponseEntity<String> Input_Locations_M(@RequestBody Locations test){
 
 		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
+
+		try(Connection connection = dataSource.getConnection())
+		{
+			String loc = "SRID=4326;POINT(" + String.valueOf(test.latitude) + " " + String.valueOf(test.longitude) + ")";
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("UPDATE evacuee SET location = '" + loc + "' WHERE user_id = '"+ test.user_id +"'");
+		}
+		catch(Exception e)
+		{
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
