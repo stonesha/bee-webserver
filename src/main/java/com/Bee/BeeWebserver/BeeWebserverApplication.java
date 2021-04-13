@@ -481,20 +481,18 @@ public class BeeWebserverApplication {
 	@PostMapping(path = "/Input_Location_M", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations_M(@RequestBody Locations test){
 
-		String file = "longitude = " + test.longitude + ", latitude = " + test.latitude;
-
 		try(Connection connection = dataSource.getConnection())
 		{
 			String loc = "SRID=4326;POINT(" + String.valueOf(test.latitude) + " " + String.valueOf(test.longitude) + ")";
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("UPDATE evacuee SET location = '" + loc + "' WHERE user_id = '"+ test.user_id +"'");
+			stmt.executeUpdate("UPDATE evacuee SET location = ST_GeographyFromText('" + loc + "') WHERE user_id = '"+ test.user_id +"'");
 		}
 		catch(Exception e)
 		{
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
 
-		return new ResponseEntity<>(file, HttpStatus.OK);
+		return new ResponseEntity<>("Success", HttpStatus.OK);
 	}
 
 	// Recieving evacuee info from mobile application
