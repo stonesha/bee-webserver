@@ -483,7 +483,7 @@ public class BeeWebserverApplication {
 
 		try(Connection connection = dataSource.getConnection())
 		{
-			String loc = "SRID=4326;POINT(" + String.valueOf(test.latitude) + " " + String.valueOf(test.longitude) + ")";
+			//String loc = "SRID=4326;POINT(" + String.valueOf(test.latitude) + " " + String.valueOf(test.longitude) + ")";
 			String loc2 = test.latitude + " " + test.longitude;
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("UPDATE evacuee SET location = '" + loc2 + "' WHERE user_id = '"+ test.user_id +"'");
