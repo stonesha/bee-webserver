@@ -390,12 +390,15 @@ public class BeeWebserverApplication {
 	public ResponseEntity<String> Return_Safe_Count(){
 		//might want to change the response entity to the class container maybe?
 
-		integer total = 0;
-		integer safe = 0;
+		Integer total = 0;
+		Integer safe = 0;
+
+	
 
 		try(Connection connection = dataSource.getConnection())
 		{
-			return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
+			//return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
+			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM evacuee WHERE safe = 'true'");
 			ResultSet rs2 = stmt.executeQuery("SELECT COUNT(*) FROM evacuee");
 
