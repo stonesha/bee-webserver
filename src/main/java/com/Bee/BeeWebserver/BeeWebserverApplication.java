@@ -383,7 +383,7 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
-	/*
+	
 	//Setting up the Get request for returning the safe count to the web application
 	@CrossOrigin
 	@GetMapping(path = "/Return_Safe_Count", produces = "application/json")
@@ -417,7 +417,7 @@ public class BeeWebserverApplication {
 		}
 
 
-	}*/
+	}
 
 
 
