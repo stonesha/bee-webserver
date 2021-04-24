@@ -393,7 +393,7 @@ public class BeeWebserverApplication {
 		Integer total = 0;
 		Integer safe = 0;
 
-		Safe_Evac test = new Safe_Evac();
+		Safe_Evac test = new Safe_Evac(total,safe);
 
 		try(Connection connection = dataSource.getConnection())
 		{
@@ -403,11 +403,11 @@ public class BeeWebserverApplication {
 			ResultSet rs2 = stmt.executeQuery("SELECT COUNT(*) FROM evacuee");
 
 			while (rs.next()) {
-				test.safe_evacuees = rs.getInt(1);
+				//test.safe_evacuees = rs.getInt(1);
 			}
 
 			while (rs2.next()) {
-				test.total_evacuees = rs2.getInt(1);
+				//test.total_evacuees = rs2.getInt(1);
 			}
 
 			//String count = String.valueOf(safe) + "/" + String.valueOf(total);
