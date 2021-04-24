@@ -385,6 +385,7 @@ public class BeeWebserverApplication {
 
 	
 	//Setting up the Get request for returning the safe count to the web application
+	//complete
 	@CrossOrigin
 	@GetMapping(path = "/Return_Safe_Count", produces = "application/json")
 	public ResponseEntity<String> Return_Safe_Count(){
@@ -410,16 +411,12 @@ public class BeeWebserverApplication {
 			}
 
 			//Convert to json - Json won't format correctly unless you use the class container (in this case Safe_Evac)
-			Safe_Evac test = new Safe_Evac(total,safe);
-
-			Safe_Evac[] testarray = new Safe_Evac[2];
-			testarray[0] = new Safe_Evac(0,0);
-			testarray[1] = new Safe_Evac(1,1);
+			Safe_Evac safeCont = new Safe_Evac(total,safe);
 
 			Gson gson = new Gson();
-			String testJson = gson.toJson(testarray);
+			String safeJson = gson.toJson(safeCont);
 
-			return new ResponseEntity<>(testJson, HttpStatus.OK);
+			return new ResponseEntity<>(safeJson, HttpStatus.OK);
 		}
 		catch(Exception e)
 		{
