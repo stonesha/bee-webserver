@@ -407,7 +407,7 @@ public class BeeWebserverApplication {
 			}
 
 			while (rs2.next()) {
-				total = rs2.getInt(2);
+				total = rs2.getInt(1);
 			}
 
 			String count = String.valueOf(safe) + "/" + String.valueOf(total);
