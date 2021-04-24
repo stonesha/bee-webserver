@@ -393,28 +393,25 @@ public class BeeWebserverApplication {
 		Integer total = 0;
 		Integer safe = 0;
 
-		Safe_Evac test = new Safe_Evac(total,safe);
-
 		try(Connection connection = dataSource.getConnection())
 		{
-			//return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
+			//rs = safe count
+			//rs2 = total count
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM evacuee WHERE safe = 'true'");
 			ResultSet rs2 = stmt.executeQuery("SELECT COUNT(*) FROM evacuee");
 
 			while (rs.next()) {
-				//test.safe_evacuees = rs.getInt(1);
+				safe = rs.getInt(1);
 			}
 
 			while (rs2.next()) {
-				//test.total_evacuees = rs2.getInt(1);
+				total = rs2.getInt(1);
 			}
 
-			//String count = String.valueOf(safe) + "/" + String.valueOf(total);
-			
-
+			//Convert to json - Json won't format correctly unless you use the class container (in this case Safe_Evac)
+			Safe_Evac test = new Safe_Evac(total,safe);
 			Gson gson = new Gson();
-
 			String testJson = gson.toJson(test);
 
 			return new ResponseEntity<>(testJson, HttpStatus.OK);
