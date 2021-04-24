@@ -383,7 +383,7 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
-	/*
+	
 	//Setting up the Get request for returning the safe count to the web application
 	@CrossOrigin
 	@GetMapping(path = "/Return_Safe_Count", produces = "application/json")
@@ -417,7 +417,7 @@ public class BeeWebserverApplication {
 		}
 
 
-	}*/
+	}
 
 
 
@@ -483,7 +483,7 @@ public class BeeWebserverApplication {
 
 		try(Connection connection = dataSource.getConnection())
 		{
-			String loc = "SRID=4326;POINT(" + String.valueOf(test.latitude) + " " + String.valueOf(test.longitude) + ")";
+			//String loc = "SRID=4326;POINT(" + String.valueOf(test.latitude) + " " + String.valueOf(test.longitude) + ")";
 			String loc2 = test.latitude + " " + test.longitude;
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("UPDATE evacuee SET location = '" + loc2 + "' WHERE user_id = '"+ test.user_id +"'");
