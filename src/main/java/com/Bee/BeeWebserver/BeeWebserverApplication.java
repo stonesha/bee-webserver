@@ -393,7 +393,7 @@ public class BeeWebserverApplication {
 		Integer total = 0;
 		Integer safe = 0;
 
-		
+		Safe_Evac test = new Safe_Evac();
 
 		try(Connection connection = dataSource.getConnection())
 		{
@@ -403,15 +403,16 @@ public class BeeWebserverApplication {
 			ResultSet rs2 = stmt.executeQuery("SELECT COUNT(*) FROM evacuee");
 
 			while (rs.next()) {
-				safe = rs.getInt(1);
+				test.safe_evacuees = rs.getInt(1);
 			}
 
 			while (rs2.next()) {
-				total = rs2.getInt(1);
+				test.total_evacuees = rs2.getInt(1);
 			}
 
 			//String count = String.valueOf(safe) + "/" + String.valueOf(total);
-			Safe_Evac test(safe,total);
+			
+
 			Gson gson = new Gson();
 
 			String testJson = gson.toJson(test);
