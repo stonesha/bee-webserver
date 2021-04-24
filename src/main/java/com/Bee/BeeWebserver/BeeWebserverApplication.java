@@ -411,8 +411,13 @@ public class BeeWebserverApplication {
 
 			//Convert to json - Json won't format correctly unless you use the class container (in this case Safe_Evac)
 			Safe_Evac test = new Safe_Evac(total,safe);
+
+			Safe_Evac[] testarray = new Safe_Evac[2];
+			testarray[0] = new Safe_Evac(0,0);
+			testarray[1] = new Safe_Evac(1,1);
+
 			Gson gson = new Gson();
-			String testJson = gson.toJson(test);
+			String testJson = gson.toJson(testArray);
 
 			return new ResponseEntity<>(testJson, HttpStatus.OK);
 		}
@@ -420,11 +425,7 @@ public class BeeWebserverApplication {
 		{
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
-
-
 	}
-
-
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
