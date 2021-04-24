@@ -412,7 +412,11 @@ public class BeeWebserverApplication {
 
 			String count = String.valueOf(safe) + "/" + String.valueOf(total);
 
-			return new ResponseEntity<>(count, HttpStatus.OK);
+			Gson gson = new Gson();
+
+			String countJson = gson.toJson(count);
+
+			return new ResponseEntity<>(countJson, HttpStatus.OK);
 		}
 		catch(Exception e)
 		{
