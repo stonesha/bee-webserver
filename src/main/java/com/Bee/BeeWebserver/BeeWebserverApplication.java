@@ -417,7 +417,7 @@ public class BeeWebserverApplication {
 			testarray[1] = new Safe_Evac(1,1);
 
 			Gson gson = new Gson();
-			String testJson = gson.toJson(testArray);
+			String testJson = gson.toJson(testarray);
 
 			return new ResponseEntity<>(testJson, HttpStatus.OK);
 		}
