@@ -466,11 +466,11 @@ public class BeeWebserverApplication {
 			Gson gson = new Gson();
 			String eventsJson = gson.toJson(eventInstruction);
 
-			return new ResponseEntity<>(eventInstruction, HttpStatus.OK);
+			return new ResponseEntity<>(eventsJson, HttpStatus.OK);
 		}
 		catch(Exception e)
 		{
-			return new ResponseEntity<>(e,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.toString(),HttpStatus.BAD_REQUEST);
 		}
 	}
 
