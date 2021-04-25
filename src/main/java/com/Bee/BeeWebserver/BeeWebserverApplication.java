@@ -323,6 +323,7 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
+	//marking not safe when the mobile app sends a not safe flag
 	@CrossOrigin
 	@PostMapping(path = "/Mark_Not_Safe_M/{id}", consumes = "application/json")
 	public ResponseEntity<String> Mark_Not_Safe(@PathVariable String id, @RequestBody Locations test){
@@ -535,6 +536,7 @@ public class BeeWebserverApplication {
 	}
 	*/
 
+	//function to input zones, maker, and route into the database, however might be scrapped for a better format later
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
@@ -591,6 +593,7 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>("success" + test, HttpStatus.OK);
 	}
 
+	//recives the location of the user and updates their location in the database
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location_M", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations_M(@RequestBody Locations test){
