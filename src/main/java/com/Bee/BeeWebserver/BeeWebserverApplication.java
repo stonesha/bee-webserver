@@ -444,17 +444,23 @@ public class BeeWebserverApplication {
 	@GetMapping(path = "/Send_Instructions", produces = "application/json")
 	public ResponseEntity<String> Send_Instructions(){
 
+		String severity = " ";
+		String instructions = " ";
+		String last_update = " ";
+		String type = " ";
+		String event_id = " ";
+
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM events");
 
 			while(rs.next()){
-				String severity = rs.getString(1);
-				String instructions = rs.getString(2);
-				String last_update = rs.getString(3);
-				String type = rs.getString(4);
-				String event_id = rs.getString(5);
+				severity = rs.getString(1);
+				instructions = rs.getString(2);
+				last_update = rs.getString(3);
+				type = rs.getString(4);
+				event_id = rs.getString(5);
 			}
 			Events eventInstruction = new Events(severity, instructions, last_update, type, event_id);
 			Gson gson = new Gson();
