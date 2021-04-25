@@ -545,7 +545,7 @@ public class BeeWebserverApplication {
 			{
 				Statement stmt = connection.createStatement();
 				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ test + "')");
-				Resultset rs = stmt.executeUpdate("SELECT id FROM bc_test WHERE json = ('"+ test + "')");
+				ResultSet rs = stmt.executeUpdate("SELECT id FROM bc_test WHERE json = ('"+ test + "')");
 				Integer id = rs.getInt(1);
 
 				return new ResponseEntity<>(id.toString(), HttpStatus.OK);
