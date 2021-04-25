@@ -566,7 +566,7 @@ public class BeeWebserverApplication {
 		Integer id = 0;
 		String z = feature.getType();
 
-		if(z == "Polygon"){
+		if(z.equals("Polygon")){
 			try(Connection connection = dataSource.getConnection())
 			{
 				String json = gson.toJson(feature);
