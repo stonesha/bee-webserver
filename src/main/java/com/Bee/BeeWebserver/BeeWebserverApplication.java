@@ -536,7 +536,24 @@ public class BeeWebserverApplication {
 	}
 	*/
 
-	//function to input zones, maker, and route into the database, however might be scrapped for a better format later
+	@CrossOrigin
+	@PostMapping(path = "/Input_Location", consumes = "application/json")
+	public ResponseEntity<String> Input_Routes(@RequestBody String feature){
+
+		String test = new String(feature);
+		try(Connection connection = dataSource.getConnection())
+			{
+				Statement stmt = connection.createStatement();
+				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ test + "')");
+				String s = "success";
+				return new ResponseEntity<>(s, HttpStatus.OK);
+			}
+		catch(Exception e){
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/*function to input zones, maker, and route into the database, however might be scrapped for a better format later
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
@@ -591,7 +608,7 @@ public class BeeWebserverApplication {
 
 
 		return new ResponseEntity<>("success" + test, HttpStatus.OK);
-	}
+	}*/
 
 	//recives the location of the user and updates their location in the database
 	@CrossOrigin
