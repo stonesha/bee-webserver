@@ -432,7 +432,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO JSON_TEST (json) VALUES (feature)");
+				stmt.executeUpdate("INSERT INTO json_test (json) VALUES ('feature')");
 				String s = "success";
 				return new ResponseEntity<>(s, HttpStatus.OK);
 			}
