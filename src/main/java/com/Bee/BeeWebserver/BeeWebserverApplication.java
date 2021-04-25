@@ -384,8 +384,8 @@ public class BeeWebserverApplication {
 	}
 
 	
-	//Setting up the Get request for returning the safe count to the web application
-	//complete
+	// Returns count of users that have marked themselves safe to web application.
+	// complete
 	@CrossOrigin
 	@GetMapping(path = "/Return_Safe_Count", produces = "application/json")
 	public ResponseEntity<String> Return_Safe_Count(){
@@ -420,6 +420,23 @@ public class BeeWebserverApplication {
 		}
 		catch(Exception e)
 		{
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+
+	// testing input route
+	@CrossOrigin
+	@PostMapping(path = "/Input_Route", consumes = "application/json")
+	public ResponseEntity<String> Input_Routes(@RequestBody String feature){
+		try(Connection connection = dataSource.getConnection())
+			{
+				Statement stmt = connection.createStatement();
+				stmt.executeUpdate("INSERT INTO JSON_TEST (json) VALUES (feature)");
+				String s = "success";
+				return new ResponseEntity<>(s, HttpStatus.OK);
+			}
+		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
 	}
