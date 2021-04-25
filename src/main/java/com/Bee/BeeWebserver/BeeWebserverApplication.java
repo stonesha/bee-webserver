@@ -562,7 +562,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			Resultset rs = stmt.executeQuery()
+			Resultset rs = stmt.executeQuery();
 
 		}
 	}
