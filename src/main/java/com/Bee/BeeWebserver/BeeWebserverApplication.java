@@ -430,11 +430,11 @@ public class BeeWebserverApplication {
 	@PostMapping(path = "/Input_Route", consumes = "application/json")
 	public ResponseEntity<String> Input_Routes(@RequestBody String feature){
 		//Gson gson = new Gson();
-		String test = feature; //gson.fromJson(feature,String.class);
+		String test = new String(feature); //gson.fromJson(feature,String.class);
 		try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO json_test (json) VALUES ('"+ test "')");
+				stmt.executeUpdate("INSERT INTO json_test (json) VALUES (test)");
 				String s = "success";
 				return new ResponseEntity<>(s, HttpStatus.OK);
 			}
