@@ -426,12 +426,11 @@ public class BeeWebserverApplication {
 	@PostMapping(path = "/Input_Instructions", consumes = "application/json")
 	public ResponseEntity<String> Input_Instructions(@RequestBody Events event){
 		
-		String eventJson = new String(event);
-		Events testEvent = new Events(event.severity, event.instructions, event.last_update, event.type, event.event_id, eventJson);
+		Events testEvent = new Events(event.severity, event.instructions, event.last_update, event.type, event.event_id);
 		
 		try(Connection connection = dataSource.getConnection()){
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO events (severity, instructions, last_update, type, event_id, json) VALUES ('"+ testEvent.severity + "', '" + testEvent.instructions + "','" + testEvent.last_update + "','" + testEvent.type + "','" + testEvent.event_id + "','" + testEvent.json + "')" );
+			stmt.executeUpdate("INSERT INTO events (severity, instructions, last_update, type, event_id) VALUES ('"+ testEvent.severity + "', '" + testEvent.instructions + "','" + testEvent.last_update + "','" + testEvent.type + "','" + testEvent.event_id + "')");
 		}
 		catch(Exception e){
 			return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
