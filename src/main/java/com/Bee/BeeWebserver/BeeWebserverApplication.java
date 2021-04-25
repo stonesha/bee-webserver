@@ -428,11 +428,13 @@ public class BeeWebserverApplication {
 	// testing input route
 	@CrossOrigin
 	@PostMapping(path = "/Input_Route", consumes = "application/json")
-	public ResponseEntity<String> Input_Routes(@RequestBody String feature){
+	public ResponseEntity<String> Input_Routes(@RequestBody JSON feature){
+		Gson gson = new Gson();
+		String test = gson.fromJson(feature,String.class);
 		try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO json_test (json) VALUES ('feature')");
+				stmt.executeUpdate("INSERT INTO json_test (json) VALUES (test)");
 				String s = "success";
 				return new ResponseEntity<>(s, HttpStatus.OK);
 			}
