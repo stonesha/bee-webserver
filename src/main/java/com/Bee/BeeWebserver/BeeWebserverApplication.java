@@ -536,7 +536,7 @@ public class BeeWebserverApplication {
 	}
 	*/
 
-	@CrossOrigin
+	/*@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Routes(@RequestBody String feature){
 		Integer id = 0;
@@ -554,6 +554,31 @@ public class BeeWebserverApplication {
 			}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
+	}*/
+
+	@CrossOrigin
+	@PostMapping(path = "/Input_Location", consumes = "application/json")
+	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
+		String test = " ";
+		Gson gson = new Gson();
+		String json = gson.toJson(feature);
+		Integer id = 0;
+		if(feature.type == "Polygon"){
+			try(Connection connection = dataSource.getConnection())
+			{
+				Statement stmt = connection.createStatement();
+				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ json + "')");
+				ResultSet rs = stmt.executeQuery("SELECT id FROM bc_test WHERE json = ('"+ json + "')");
+				while(rs.next()){
+					id = rs.getInt(1);
+				}
+
+				return new ResponseEntity<>(id.toString(), HttpStatus.OK);
+			}
+			catch(Exception e){
+				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+			}
 		}
 	}
 
