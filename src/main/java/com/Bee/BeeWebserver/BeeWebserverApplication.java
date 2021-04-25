@@ -564,6 +564,7 @@ public class BeeWebserverApplication {
 		Gson gson = new Gson();
 		String json = gson.toJson(feature);
 		Integer id = 0;
+
 		if(feature.type == "Polygon"){
 			try(Connection connection = dataSource.getConnection())
 			{
@@ -580,6 +581,7 @@ public class BeeWebserverApplication {
 				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
 		}
+		return new ResponseEntity<>("z" + test, HttpStatus.OK);
 	}
 
 	/*@CrossOrigin
