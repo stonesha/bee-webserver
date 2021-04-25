@@ -6,4 +6,9 @@ public class Feature{
 
     public String type;
     public double[][][] coordinates;
+
+
+    public String getType(){
+        return this.type;
+    }
 }
