@@ -567,7 +567,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	}
+	
 	/*function to input zones, maker, and route into the database, however might be scrapped for a better format later
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
