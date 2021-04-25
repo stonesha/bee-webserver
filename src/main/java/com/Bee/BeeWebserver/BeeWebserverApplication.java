@@ -581,7 +581,8 @@ public class BeeWebserverApplication {
 				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
 		}
-		return new ResponseEntity<>("z" + test, HttpStatus.OK);
+		String output = toString(feature.type);
+		return new ResponseEntity<>(output, HttpStatus.OK);
 	}
 
 	/*@CrossOrigin
