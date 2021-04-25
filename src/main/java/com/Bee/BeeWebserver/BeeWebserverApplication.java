@@ -428,7 +428,7 @@ public class BeeWebserverApplication {
 	// testing input route
 	@CrossOrigin
 	@PostMapping(path = "/Input_Route", consumes = "application/json")
-	public ResponseEntity<String> Input_Routes(@RequestBody JSON feature){
+	public ResponseEntity<String> Input_Routes(@RequestBody String feature){
 		Gson gson = new Gson();
 		String test = gson.fromJson(feature,String.class);
 		try(Connection connection = dataSource.getConnection())
