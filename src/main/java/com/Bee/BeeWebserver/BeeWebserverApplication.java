@@ -539,14 +539,16 @@ public class BeeWebserverApplication {
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Routes(@RequestBody String feature){
-
+		Integer id = 0;
 		String test = new String(feature);
 		try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
 				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ test + "')");
 				ResultSet rs = stmt.executeQuery("SELECT id FROM bc_test WHERE json = ('"+ test + "')");
-				Integer id = rs.getInt(1);
+				while(rs.next()){
+					id = rs.getInt(1);
+				}
 
 				return new ResponseEntity<>(id.toString(), HttpStatus.OK);
 			}
