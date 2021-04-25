@@ -439,6 +439,35 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(s, HttpStatus.OK);
 	}
 
+	//Send Instructions to mobile application
+	@CrossOrigin
+	@GetMapping(path = "/Send_Instructions", produces = "application/json")
+	public ResponseEntity<String> Send_Instructions(){
+
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM events");
+
+			while(rs.next()){
+				String severity = rs.getString(1);
+				String instructions = rs.getString(2);
+				String last_update = rs.getString(3);
+				String type = rs.getString(4);
+				String event_id = rs.getString(5);
+			}
+			Events eventInstruction = new Events(severity, instructions, last_update, type, event_id);
+			Gson gson = new Gson();
+			String eventsJson = gson.toJson(eventInstruction);
+
+			return new ResponseEntity<>(eventInstruction, HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+			return new ResponseEntity<>(e,HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	// Returns count of users that have marked themselves safe to web application.
 	// complete
 	@CrossOrigin
@@ -481,6 +510,7 @@ public class BeeWebserverApplication {
 
 	/* Pseudo-template for including json object in sql query
 	Converts json to string, stores it in jsonb object in the table
+	requires requestbody to be a string
 	@CrossOrigin
 	@PostMapping(path = "/Input_Route", consumes = "application/json")
 	public ResponseEntity<String> Input_Routes(@RequestBody String feature){
