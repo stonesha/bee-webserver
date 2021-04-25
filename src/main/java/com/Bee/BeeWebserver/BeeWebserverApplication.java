@@ -545,14 +545,29 @@ public class BeeWebserverApplication {
 			{
 				Statement stmt = connection.createStatement();
 				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ test + "')");
-				String s = "success";
-				return new ResponseEntity<>(s, HttpStatus.OK);
+				Resultset rs = stmt.executeUpdate("SELECT id FROM bc_test WHERE json = ('"+ test + "')");
+				Integer id = rs.getInt(1);
+
+				return new ResponseEntity<>(id.toString(), HttpStatus.OK);
 			}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
 	}
 
+	@CrossOrigin
+	@GetMapping(path = "/Send_Zone", produces = "application/json")
+	public ResponseEntity<String> Send_Zone(@RequestBody String feature){
+
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			Resultset rs = stmt.executeQuery()
+
+		}
+	}
+
+	}
 	/*function to input zones, maker, and route into the database, however might be scrapped for a better format later
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
