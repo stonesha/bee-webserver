@@ -562,12 +562,13 @@ public class BeeWebserverApplication {
 	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
 		String test = " ";
 		Gson gson = new Gson();
-		String json = gson.toJson(feature);
+		//String json = gson.toJson(feature);
 		Integer id = 0;
 
 		if(feature.type == "Polygon"){
 			try(Connection connection = dataSource.getConnection())
 			{
+				String json = gson.toJson(feature);
 				Statement stmt = connection.createStatement();
 				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ json + "')");
 				ResultSet rs = stmt.executeQuery("SELECT id FROM bc_test WHERE json = ('"+ json + "')");
@@ -581,8 +582,7 @@ public class BeeWebserverApplication {
 				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
 		}
-		String output = toString(feature.type);
-		return new ResponseEntity<>(output, HttpStatus.OK);
+		return new ResponseEntity<>("s", HttpStatus.OK);
 	}
 
 	/*@CrossOrigin
