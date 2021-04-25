@@ -562,28 +562,54 @@ public class BeeWebserverApplication {
 	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
 		String test = " ";
 		Gson gson = new Gson();
-		//String json = gson.toJson(feature);
+		String json = gson.toJson(feature);
 		Integer id = 0;
 		String z = feature.getType();
 
 		if(z.equals("Polygon")){
 			try(Connection connection = dataSource.getConnection())
 			{
-				String json = gson.toJson(feature);
 				Statement stmt = connection.createStatement();
 				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ json + "')");
 				ResultSet rs = stmt.executeQuery("SELECT id FROM bc_test WHERE json = ('"+ json + "')");
 				while(rs.next()){
 					id = rs.getInt(1);
 				}
-
+				return new ResponseEntity<>(id.toString(), HttpStatus.OK);
+			}
+			catch(Exception e){
+				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+			}
+		} else if(z.equals("LineString")){
+			try(Connection connection = dataSource.getConnection())
+			{
+				Statement stmt = connection.createStatement();
+				stmt.executeUpdate("INSERT INTO routes_test (json) VALUES ('"+ json + "')");
+				ResultSet rs = stmt.executeQuery("SELECT id FROM routes_test WHERE json = ('"+ json + "')");
+				while(rs.next()){
+					id = rs.getInt(1);
+				}
+				return new ResponseEntity<>(id.toString(), HttpStatus.OK);
+			}
+			catch(Exception e){
+				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+			}
+		} else if(z.equals("Point")){
+			try(Connection connection = dataSource.getConnection())
+			{
+				Statement stmt = connection.createStatement();
+				stmt.executeUpdate("INSERT INTO wp_demo (json) VALUES ('"+ json + "')");
+				ResultSet rs = stmt.executeQuery("SELECT id FROM wp_demo WHERE json = ('"+ json + "')");
+				while(rs.next()){
+					id = rs.getInt(1);
+				}
 				return new ResponseEntity<>(id.toString(), HttpStatus.OK);
 			}
 			catch(Exception e){
 				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
 		}
-		return new ResponseEntity<>(z, HttpStatus.OK);
+		return new ResponseEntity<>("failed", HttpStatus.OK);
 	}
 
 	/*@CrossOrigin
