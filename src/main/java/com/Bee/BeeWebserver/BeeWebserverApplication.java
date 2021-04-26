@@ -364,6 +364,20 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
+	@CrossOrigin
+	@PostMapping(path = "/Update_Username", consumes = "application/json")
+	public ResponseEntity<String> Make_Report(@RequestBody Evacuee evac){
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("UPDATE evacuee SET name = '" + evac.name + "' WHERE user_id = '"+ evac.user_id + "'");
+		}
+		catch(Exception e){
+			return new ResponseEntity<>("Error ", HttpStatus.BAD_REQUEST);
+		}
+		String file = "username updated";
+		return new ResponseEntity<>(file, HttpStatus.OK);
+	}
 	// Sends Report info to web application
 	/* NOT DONE
 	@CrossOrigin
