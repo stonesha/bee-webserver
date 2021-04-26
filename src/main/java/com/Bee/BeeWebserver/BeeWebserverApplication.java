@@ -427,7 +427,7 @@ public class BeeWebserverApplication {
 	@PostMapping(path = "/Acknowledge_Notification", consumes = "application/json")
 	public ResponseEntity<String> Acknowledge_Notification(@RequestBody Evacuee evacuee){
 	
-		try(Connection connection = dataSource.createStatement())
+		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("UPDATE evacuee SET acknowledged = 'true' WHERE user_id = ('" + evacuee.user_id + "')");
