@@ -445,7 +445,7 @@ public class BeeWebserverApplication {
 		//might want to change the response entity to the class container maybe?
 
 		Integer total = 0;
-		Integer safe = 0;
+		Integer acknowledged = 0;
 
 		try(Connection connection = dataSource.getConnection())
 		{
