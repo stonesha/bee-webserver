@@ -423,6 +423,22 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
+	@CrossOrigin
+	@PostMapping(path = "/Acknowledge_Notification", consumes = "application/json")
+	public ResponseEntity<String> Acknowledge_Notification(@RequestBody Evacuee evacuee){
+	
+		try(Connection connection = dataSource.createStatement())
+		{
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate("UPDATE evacuee SET acknowledged = 'true' WHERE user_id = ('" + evacuee.user_id + "')");
+		}
+		catch(Exception e){
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
+		String z = "yes";
+		return new ResponseEntity<>(z,HttpStatus.OK);
+	}
+
 	//Recieve instructions from web application
 	@CrossOrigin
 	@PostMapping(path = "/Input_Instructions", consumes = "application/json")
