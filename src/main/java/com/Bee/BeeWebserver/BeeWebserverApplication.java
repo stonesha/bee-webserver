@@ -611,7 +611,6 @@ public class BeeWebserverApplication {
 	@CrossOrigin
 	@GetMapping(path = "/Send_Zone", produces = "application/json")
 	public ResponseEntity<String> Send_Zone(){
-		//ArrayList<String> zones = new ArrayList<String>();
 		String zones = "";
 		Gson gson = new Gson();
 		try(Connection connection = dataSource.getConnection())
@@ -619,10 +618,8 @@ public class BeeWebserverApplication {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM bc_test");
 			while(rs.next()){
-				zones += rs.getString(2);
-				//zonzones = zones + es.add(new String(rs.getString(2)));
+				zones += "," + rs.getString(2);
 			}
-			//String zoneJson = gson.toJson(zones);
 			return new ResponseEntity<>(zones, HttpStatus.OK);
 		}
 		catch(Exception e){
@@ -630,20 +627,20 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	/*
 	//Sends all route data to mobile app from database
 	@CrossOrigin
 	@GetMapping(path = "/Send_Route", produces = "application/json")
 	public ResponseEntity<String> Send_Route(){
 		//ArrayList<String> routes = new ArrayList<String>();
-		Strin
+		String routes = "";
 		Gson gson = new Gson();
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM routes_test");
 			while(rs.next()){
-				routes.add(new String(rs.getString(2)));
+				routes += "," + rs.getString(2);
+				//routes.add(new String(rs.getString(2)));
 			}
 			//String routesJson = gson.toJson(routes);
 			return new ResponseEntity<>(routes, HttpStatus.OK);
@@ -652,7 +649,7 @@ public class BeeWebserverApplication {
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+	/*
 	//Sends all point data to mobile app
 	@CrossOrigin
 	@GetMapping(path = "/Send_Point", produces = "application/json")
