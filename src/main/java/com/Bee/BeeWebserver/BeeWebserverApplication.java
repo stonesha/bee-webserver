@@ -466,10 +466,11 @@ public class BeeWebserverApplication {
 			//Convert to json - Json won't format correctly unless you use the class container (in this case Safe_Evac)
 			//Safe_Evac safeCont = new Safe_Evac(total,safe);
 
-			//Gson gson = new Gson();
+			Gson gson = new Gson();
 			String ack = new String("Acknowledged:" + acknowledged + ", Total: " + total);
+			String ackJson = gson.toJson(ack);
 
-			return new ResponseEntity<>(ack, HttpStatus.OK);
+			return new ResponseEntity<>(ackJson, HttpStatus.OK);
 		}
 		catch(Exception e)
 		{
