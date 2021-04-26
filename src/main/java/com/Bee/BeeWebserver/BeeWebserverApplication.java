@@ -565,8 +565,8 @@ public class BeeWebserverApplication {
 			try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ test + "')");
-				ResultSet rs = stmt.executeQuery("SELECT id FROM bc_test WHERE json = ('"+ test + "')");
+				stmt.executeUpdate("INSERT INTO bound_coords (json) VALUES ('"+ test + "')");
+				ResultSet rs = stmt.executeQuery("SELECT id FROM bound_coords WHERE json = ('"+ test + "')");
 				while(rs.next()){
 					id = rs.getInt(1);
 				}
@@ -579,8 +579,8 @@ public class BeeWebserverApplication {
 			try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO routes_test (json) VALUES ('"+ test + "')");
-				ResultSet rs = stmt.executeQuery("SELECT id FROM routes_test WHERE json = ('"+ test + "')");
+				stmt.executeUpdate("INSERT INTO routes (json) VALUES ('"+ test + "')");
+				ResultSet rs = stmt.executeQuery("SELECT id FROM routes WHERE json = ('"+ test + "')");
 				while(rs.next()){
 					id = rs.getInt(1);
 				}
@@ -593,8 +593,8 @@ public class BeeWebserverApplication {
 			try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO wp_demo (json) VALUES ('"+ test + "')");
-				ResultSet rs = stmt.executeQuery("SELECT id FROM wp_demo WHERE json = ('"+ test + "')");
+				stmt.executeUpdate("INSERT INTO waypoints (json) VALUES ('"+ test + "')");
+				ResultSet rs = stmt.executeQuery("SELECT id FROM waypoints WHERE json = ('"+ test + "')");
 				while(rs.next()){
 					id = rs.getInt(1);
 				}
@@ -616,7 +616,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM bc_test");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM bound_coords");
 			while(rs.next()){
 				zones += "|" + rs.getString(2);
 			}
@@ -637,7 +637,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM routes_test");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM routes");
 			while(rs.next()){
 				routes += "|" + rs.getString(2);
 			}
@@ -657,7 +657,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM wp_demo");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM waypoints");
 			while(rs.next()){
 				points += "|" + rs.getString(2);
 			}
