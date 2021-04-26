@@ -544,7 +544,9 @@ public class BeeWebserverApplication {
 			while(rs.next()){
 				user_loc += "|" + rs.getString(1);
 			}
-			return new ResponseEntity<>(user_loc, HttpStatus.OK);
+			Gson gson = new Gson();
+			String user_loc_json = gson.toJson(user_loc);
+			return new ResponseEntity<>(user_loc_json, HttpStatus.OK);
 		}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
