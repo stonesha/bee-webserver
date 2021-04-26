@@ -530,7 +530,7 @@ public class BeeWebserverApplication {
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
-	}
+	}s
 	*/
 
 	@CrossOrigin
@@ -540,7 +540,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT location FROM evacuees");
+			ResultSet rs = stmt.executeQuery("SELECT location FROM evacuee");
 			while(rs.next()){
 				user_loc += "|" + rs.getString(1);
 			}
