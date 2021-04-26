@@ -487,7 +487,7 @@ public class BeeWebserverApplication {
 		
 		try(Connection connection = dataSource.getConnection()){
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO events (severity, instructions, type) VALUES ('"+ testEvent.severity + "', '" + testEvent.type + "','" + testEvent.instructions + "')");
+			stmt.executeUpdate("INSERT INTO events (severity, instructions, type) VALUES ('"+ testEvent.severity + "', '" + testEvent.instructions + "','" + testEvent.type + "')");
 		}
 		catch(Exception e){
 			return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
@@ -512,8 +512,8 @@ public class BeeWebserverApplication {
 
 			while(rs.next()){
 				severity = rs.getString(1);
-				type = rs.getString(2);
-				instructions = rs.getString(3);
+				type = rs.getString(3);
+				instructions = rs.getString(2);
 			}
 			Events eventInstruction = new Events(severity, type, instructions);
 			Gson gson = new Gson();
