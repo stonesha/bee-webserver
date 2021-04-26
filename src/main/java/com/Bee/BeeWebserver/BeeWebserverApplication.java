@@ -533,26 +533,23 @@ public class BeeWebserverApplication {
 	}
 	*/
 
-	/*@CrossOrigin
-	@PostMapping(path = "/Input_Location", consumes = "application/json")
-	public ResponseEntity<String> Input_Routes(@RequestBody String feature){
-		Integer id = 0;
-		String test = new String(feature);
+	@CrossOrigin
+	@GetMapping(path = "/Get_User_Locations", produces = "application/json")
+	public ResponseEntity<String> Get_User_Locations(){
+		String user_loc = "";
 		try(Connection connection = dataSource.getConnection())
-			{
-				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ test + "')");
-				ResultSet rs = stmt.executeQuery("SELECT id FROM bc_test WHERE json = ('"+ test + "')");
-				while(rs.next()){
-					id = rs.getInt(1);
-				}
-
-				return new ResponseEntity<>(id.toString(), HttpStatus.OK);
+		{
+			Statement stmt = connection.createStatement();
+			Resultset rs = stmt.executeQuery("SELECT location FROM evacuees");
+			while(rs.next()){
+				user_loc += "|" + rs.getString(1);
 			}
+			return new ResponseEntity<>(user_loc, HttpStatus.OK);
+		}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
-	}*/
+	}
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
@@ -667,63 +664,6 @@ public class BeeWebserverApplication {
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
 	}
-
-	/*function to input zones, maker, and route into the database, however might be scrapped for a better format later
-	@CrossOrigin
-	@PostMapping(path = "/Input_Location", consumes = "application/json")
-	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
-
-		String test= " ";
-
-		if(feature.type == "zone")
-		{
-			try(Connection connection = dataSource.getConnection())
-			{
-				Statement stmt = connection.createStatement();
-				for(int i = 0; i < feature.coordinates[0].length-1 ; i++)
-				{
-					String loc = "SRID=4326;POINT(" + String.valueOf(feature.coordinates[0][i][0]) + " " + String.valueOf(feature.coordinates[0][i][1]) + ")";
-					stmt.executeUpdate("INSERT INTO bound_coords (type, location) VALUES ('"+ feature.type +"', '"+ loc +"')");
-					test = loc;
-				}
-			}
-			catch(Exception e){
-				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
-			}
-		}
-		else if(feature.type == "line")
-		{
-			try(Connection connection = dataSource.getConnection())
-			{
-
-			}
-			catch(Exception e)
-			{
-				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
-			}
-		}
-		else if(feature.type == "mark")
-		{
-			try(Connection connection = dataSource.getConnection())
-			{
-				Statement stmt = connection.createStatement();
-				for(int i = 0; i < feature.coordinates[0].length-1 ; i++)
-				{
-					String loc = "SRID=4326;POINT(" + String.valueOf(feature.coordinates[0][i][0]) + " " + String.valueOf(feature.coordinates[0][i][1]) + ")";
-					stmt.executeUpdate("INSERT INTO locations (type, location) VALUES ('"+ feature.type +"', '"+ loc +"')");
-					test = loc;
-				}
-			}
-			catch(Exception e)
-			{
-				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
-			}
-		}
-
-
-
-		return new ResponseEntity<>("success" + test, HttpStatus.OK);
-	}*/
 
 	//recives the location of the user and updates their location in the database
 	@CrossOrigin
