@@ -435,8 +435,46 @@ public class BeeWebserverApplication {
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
-		String z = "yes";
+		String z = "success";
 		return new ResponseEntity<>(z,HttpStatus.OK);
+	}
+
+	@CrossOrigin
+	@GetMapping(path = "/Return_Acknowledge_Count", produces = "application/json")
+	public ResponseEntity<String> Return_Acknowledge_Count(){
+		//might want to change the response entity to the class container maybe?
+
+		Integer total = 0;
+		Integer safe = 0;
+
+		try(Connection connection = dataSource.getConnection())
+		{
+			//rs = safe count
+			//rs2 = total count
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM evacuee WHERE acknowledged = 'true'");
+			ResultSet rs2 = stmt.executeQuery("SELECT COUNT(*) FROM evacuee");
+
+			while (rs.next()) {
+				acknowledged = rs.getInt(1);
+			}
+
+			while (rs2.next()) {
+				total = rs2.getInt(1);
+			}
+
+			//Convert to json - Json won't format correctly unless you use the class container (in this case Safe_Evac)
+			//Safe_Evac safeCont = new Safe_Evac(total,safe);
+
+			//Gson gson = new Gson();
+			String ack = new String("Acknowledged:" + acknowledged + ", Total: " + total);
+
+			return new ResponseEntity<>(ack, HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	//Recieve instructions from web application
