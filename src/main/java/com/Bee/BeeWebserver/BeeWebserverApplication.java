@@ -613,6 +613,7 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>("failed", HttpStatus.OK);
 	}
 
+	// Sends all zone data to mobile application from database
 	@CrossOrigin
 	@GetMapping(path = "/Send_Zone", produces = "application/json")
 	public ResponseEntity<String> Send_Zone(){
@@ -633,7 +634,47 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	//Sends all route data to mobile app from database
+	@CrossOrigin
+	@GetMapping(path = "/Send_Route", produces = "application/json")
+	public ResponseEntity<String> Send_Route(){
+		ArrayList<String> routes = new ArrayList<String>();
+		Gson gson = new Gson();
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM routes_test");
+			while(rs.next()){
+				routes.add(new String(rs.getString(2)));
+			}
+			String routesJson = gson.toJson(routes);
+			return new ResponseEntity<>(routesJson, HttpStatus.OK);
+		}
+		catch(Exception e){
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
+	}
 	
+	//Sends all point data to mobile app
+	@CrossOrigin
+	@GetMapping(path = "/Send_Point", produces = "application/json")
+	public ResponseEntity<String> Send_Point(){
+		ArrayList<String> points = new ArrayList<String>();
+		Gson gson = new Gson();
+		try(Connection connection = dataSource.getConnection())
+		{
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM wp_demo");
+			while(rs.next()){
+				points.add(new String(rs.getString(2)));
+			}
+			String pointsJson = gson.toJson(points);
+			return new ResponseEntity<>(pointsJson, HttpStatus.OK);
+		}
+		catch(Exception e){
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
+	}
 	/*function to input zones, maker, and route into the database, however might be scrapped for a better format later
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
