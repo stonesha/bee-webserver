@@ -378,6 +378,7 @@ public class BeeWebserverApplication {
 		String file = "username updated";
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
+	
 	// Sends Report info to web application
 	/* NOT DONE
 	@CrossOrigin
