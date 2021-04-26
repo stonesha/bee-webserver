@@ -431,7 +431,7 @@ public class BeeWebserverApplication {
 		Events testEvent = new Events(event.severity, event.type, event.instructions);
 		
 		try(Connection connection = dataSource.getConnection()){
-			Statement stmt = conntion.createStatement();
+			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("INSERT INTO events (severity, instructions, type) VALUES ('"+ testEvent.severity + "', '" + testEvent.instructions + "','" + testEvent.type + "')");
 		}
 		catch(Exception e){
@@ -448,9 +448,7 @@ public class BeeWebserverApplication {
 
 		String severity = " ";
 		String instructions = " ";
-		String last_update = " ";
 		String type = " ";
-		String event_id = " ";
 
 		try(Connection connection = dataSource.getConnection())
 		{
@@ -459,12 +457,10 @@ public class BeeWebserverApplication {
 
 			while(rs.next()){
 				severity = rs.getString(1);
-				instructions = rs.getString(2);
-				last_update = rs.getString(3);
-				type = rs.getString(4);
-				event_id = rs.getString(5);
+				type = rs.getString(2);
+				instructions = rs.getString(3);
 			}
-			Events eventInstruction = new Events(severity, instructions, last_update, type, event_id);
+			Events eventInstruction = new Events(severity, type, instructions);
 			Gson gson = new Gson();
 			String eventsJson = gson.toJson(eventInstruction);
 
