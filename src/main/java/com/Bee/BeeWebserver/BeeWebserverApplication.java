@@ -428,11 +428,11 @@ public class BeeWebserverApplication {
 	@PostMapping(path = "/Input_Instructions", consumes = "application/json")
 	public ResponseEntity<String> Input_Instructions(@RequestBody Events event){
 		
-		Events testEvent = new Events(event.severity, event.instructions, event.last_update, event.type, event.event_id);
+		Events testEvent = new Events(event.severity, event.type, event.instructions);
 		
 		try(Connection connection = dataSource.getConnection()){
-			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO events (severity, instructions, last_update, type, event_id) VALUES ('"+ testEvent.severity + "', '" + testEvent.instructions + "','" + testEvent.last_update + "','" + testEvent.type + "','" + testEvent.event_id + "')");
+			Statement stmt = conntion.createStatement();
+			stmt.executeUpdate("INSERT INTO events (severity, instructions, type) VALUES ('"+ testEvent.severity + "', '" + testEvent.instructions + "','" + testEvent.type + "')");
 		}
 		catch(Exception e){
 			return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
@@ -560,17 +560,12 @@ public class BeeWebserverApplication {
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
-	//public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
 	public ResponseEntity<String> Input_Locations(@RequestBody String feature){
-		/*String test = " ";
-		Gson gson = new Gson();
-		String json = gson.toJson(feature);
-		Integer id = 0;
-		String z = feature.getType();*/
+
 		String test = new String(feature);
 		Integer id = 0;
 
-		if(test.indexOf("Polygon") != -1){//z.equals("Polygon")){
+		if(test.indexOf("Polygon") != -1){
 			try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
@@ -584,7 +579,7 @@ public class BeeWebserverApplication {
 			catch(Exception e){
 				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
-		} else if(test.indexOf("LineString") != -1){//z.equals("LineString")){
+		} else if(test.indexOf("LineString") != -1){
 			try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
@@ -598,7 +593,7 @@ public class BeeWebserverApplication {
 			catch(Exception e){
 				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
-		} else if(test.indexOf("Point") != -1){ //z.equals("Point")){
+		} else if(test.indexOf("Point") != -1){
 			try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
