@@ -568,6 +568,7 @@ public class BeeWebserverApplication {
 		Integer id = 0;
 		String z = feature.getType();*/
 		String test = new String(feature);
+		Integer id = 0;
 
 		if(test.indexOf("Polygon") != -1){//z.equals("Polygon")){
 			try(Connection connection = dataSource.getConnection())
