@@ -2,6 +2,7 @@ package com.Bee.BeeWebserver;
 
 import com.Bee.BeeWebserver.Locations;
 //import com.Bee.BeeWebserver.Safe_Evac;
+import java.utli.ArrayList;
 
 //basic Web application import
 import org.springframework.boot.SpringApplication;
@@ -612,17 +613,25 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>("failed", HttpStatus.OK);
 	}
 
-	/*@CrossOrigin
+	@CrossOrigin
 	@GetMapping(path = "/Send_Zone", produces = "application/json")
-	public ResponseEntity<String> Send_Zone(@RequestBody String feature){
-
+	public ResponseEntity<String> Send_Zone(){
+		ArrayList<String> zones = new ArrayList<String>();
+		Gson gson = new Gson();
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery();
-
+			ResultSet rs = stmt.executeQuery("SELECT * FROM bc_test");
+			while(rs.next()){
+				zones.add(new String(rs.getString(2)));
+			}
+			String zoneJson = gson.toJson(zones);
+			return new ResponseEntity<>(zoneJson, HttpStatus.OK);
 		}
-	}*/
+		catch(Exception e){
+			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	
 	/*function to input zones, maker, and route into the database, however might be scrapped for a better format later
