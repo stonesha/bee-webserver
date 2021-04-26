@@ -611,14 +611,16 @@ public class BeeWebserverApplication {
 	@CrossOrigin
 	@GetMapping(path = "/Send_Zone", produces = "application/json")
 	public ResponseEntity<String> Send_Zone(){
-		ArrayList<String> zones = new ArrayList<String>();
+		//ArrayList<String> zones = new ArrayList<String>();
+		String zones;
 		Gson gson = new Gson();
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM bc_test");
 			while(rs.next()){
-				zones.add(new String(rs.getString(2)));
+				zones += rs.getString(2);
+				//zonzones = zones + es.add(new String(rs.getString(2)));
 			}
 			//String zoneJson = gson.toJson(zones);
 			return new ResponseEntity<>(zones, HttpStatus.OK);
@@ -628,11 +630,13 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	/*
 	//Sends all route data to mobile app from database
 	@CrossOrigin
 	@GetMapping(path = "/Send_Route", produces = "application/json")
 	public ResponseEntity<String> Send_Route(){
-		ArrayList<String> routes = new ArrayList<String>();
+		//ArrayList<String> routes = new ArrayList<String>();
+		Strin
 		Gson gson = new Gson();
 		try(Connection connection = dataSource.getConnection())
 		{
@@ -669,6 +673,7 @@ public class BeeWebserverApplication {
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
 	}
+	*/
 	/*function to input zones, maker, and route into the database, however might be scrapped for a better format later
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
