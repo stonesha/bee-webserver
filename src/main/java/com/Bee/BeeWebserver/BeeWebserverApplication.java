@@ -612,7 +612,7 @@ public class BeeWebserverApplication {
 	@GetMapping(path = "/Send_Zone", produces = "application/json")
 	public ResponseEntity<String> Send_Zone(){
 		//ArrayList<String> zones = new ArrayList<String>();
-		String zones;
+		String zones = "";
 		Gson gson = new Gson();
 		try(Connection connection = dataSource.getConnection())
 		{
@@ -759,7 +759,7 @@ public class BeeWebserverApplication {
 	}
 
 	// Sending zone data to Web Application
-	@CrossOrigin
+	@CrossOrigin = ""
 	@GetMapping(path = "/Send_Zone_to_WA", produces = "application/json")
 	public ResponseEntity<String> Send_Zone_to_WA(){
 		//SQL query to get zone data from database
