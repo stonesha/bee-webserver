@@ -540,7 +540,7 @@ public class BeeWebserverApplication {
 		try(Connection connection = dataSource.getConnection())
 		{
 			Statement stmt = connection.createStatement();
-			Resultset rs = stmt.executeQuery("SELECT location FROM evacuees");
+			ResultSet rs = stmt.executeQuery("SELECT location FROM evacuees");
 			while(rs.next()){
 				user_loc += "|" + rs.getString(1);
 			}
