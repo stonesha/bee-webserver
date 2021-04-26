@@ -618,7 +618,7 @@ public class BeeWebserverApplication {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM bc_test");
 			while(rs.next()){
-				zones += "," + rs.getString(2);
+				zones += "|" + rs.getString(2);
 			}
 			return new ResponseEntity<>(zones, HttpStatus.OK);
 		}
@@ -639,7 +639,7 @@ public class BeeWebserverApplication {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM routes_test");
 			while(rs.next()){
-				routes += "," + rs.getString(2);
+				routes += "|" + rs.getString(2);
 			}
 			return new ResponseEntity<>(routes, HttpStatus.OK);
 		}
@@ -659,7 +659,7 @@ public class BeeWebserverApplication {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM wp_demo");
 			while(rs.next()){
-				points += "," + rs.getString(2);
+				points += "|" + rs.getString(2);
 			}
 			return new ResponseEntity<>(points, HttpStatus.OK);
 		}
