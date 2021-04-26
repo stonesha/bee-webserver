@@ -560,19 +560,21 @@ public class BeeWebserverApplication {
 
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
-	public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
-		String test = " ";
+	//public ResponseEntity<String> Input_Locations(@RequestBody Feature feature){
+	public ResponseEntity<String> Input_Locations(@RequestBody String feature){
+		/*String test = " ";
 		Gson gson = new Gson();
 		String json = gson.toJson(feature);
 		Integer id = 0;
-		String z = feature.getType();
+		String z = feature.getType();*/
+		String test = new String(feature);
 
-		if(z.equals("Polygon")){
+		if(test.indexOf("Polygon") != -1){//z.equals("Polygon")){
 			try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ json + "')");
-				ResultSet rs = stmt.executeQuery("SELECT id FROM bc_test WHERE json = ('"+ json + "')");
+				stmt.executeUpdate("INSERT INTO bc_test (json) VALUES ('"+ test + "')");
+				ResultSet rs = stmt.executeQuery("SELECT id FROM bc_test WHERE json = ('"+ test + "')");
 				while(rs.next()){
 					id = rs.getInt(1);
 				}
@@ -581,12 +583,12 @@ public class BeeWebserverApplication {
 			catch(Exception e){
 				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
-		} else if(z.equals("LineString")){
+		} else if(test.indexOf("LineString") != -1){//z.equals("LineString")){
 			try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO routes_test (json) VALUES ('"+ json + "')");
-				ResultSet rs = stmt.executeQuery("SELECT id FROM routes_test WHERE json = ('"+ json + "')");
+				stmt.executeUpdate("INSERT INTO routes_test (json) VALUES ('"+ test + "')");
+				ResultSet rs = stmt.executeQuery("SELECT id FROM routes_test WHERE json = ('"+ test + "')");
 				while(rs.next()){
 					id = rs.getInt(1);
 				}
@@ -595,12 +597,12 @@ public class BeeWebserverApplication {
 			catch(Exception e){
 				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
-		} else if(z.equals("Point")){
+		} else if(test.indexOf("Point") != -1){ //z.equals("Point")){
 			try(Connection connection = dataSource.getConnection())
 			{
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("INSERT INTO wp_demo (json) VALUES ('"+ json + "')");
-				ResultSet rs = stmt.executeQuery("SELECT id FROM wp_demo WHERE json = ('"+ json + "')");
+				stmt.executeUpdate("INSERT INTO wp_demo (json) VALUES ('"+ test + "')");
+				ResultSet rs = stmt.executeQuery("SELECT id FROM wp_demo WHERE json = ('"+ test + "')");
 				while(rs.next()){
 					id = rs.getInt(1);
 				}
