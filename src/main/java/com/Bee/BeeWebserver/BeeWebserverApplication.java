@@ -487,7 +487,7 @@ public class BeeWebserverApplication {
 		
 		try(Connection connection = dataSource.getConnection()){
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("INSERT INTO events (severity, instructions, type) VALUES ('"+ testEvent.severity + "', '" + testEvent.instructions + "','" + testEvent.type + "')");
+			stmt.executeUpdate("INSERT INTO events (severity, instructions, type) VALUES ('"+ testEvent.severity + "', '" + testEvent.type + "','" + testEvent.instructions + "')");
 		}
 		catch(Exception e){
 			return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
