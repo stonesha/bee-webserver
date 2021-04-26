@@ -620,8 +620,8 @@ public class BeeWebserverApplication {
 			while(rs.next()){
 				zones.add(new String(rs.getString(2)));
 			}
-			String zoneJson = gson.toJson(zones);
-			return new ResponseEntity<>(zoneJson, HttpStatus.OK);
+			//String zoneJson = gson.toJson(zones);
+			return new ResponseEntity<>(zones, HttpStatus.OK);
 		}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
@@ -641,8 +641,8 @@ public class BeeWebserverApplication {
 			while(rs.next()){
 				routes.add(new String(rs.getString(2)));
 			}
-			String routesJson = gson.toJson(routes);
-			return new ResponseEntity<>(routesJson, HttpStatus.OK);
+			//String routesJson = gson.toJson(routes);
+			return new ResponseEntity<>(routes, HttpStatus.OK);
 		}
 		catch(Exception e){
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
