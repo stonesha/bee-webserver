@@ -57,12 +57,14 @@ public class BeeWebserverApplication {
 		SpringApplication.run(BeeWebserverApplication.class, args);
 	}
 
+	//original test function to see if the webserver was functional. Prints hello world to the screen when you go the web address
 	@CrossOrigin
 	@GetMapping("/")
 	String hello(){
 		return "Hello World";
 	}
 
+	//test function for inputing data into the locations table in the database
 	@CrossOrigin
 	@GetMapping("/test")
 	String test(Map<String, Object> model){
@@ -90,7 +92,7 @@ public class BeeWebserverApplication {
 	}
 
 
-	// Testing for events table
+	//test function for inputing data into the events table in the database
 	@CrossOrigin
 	@GetMapping("/events")
 	String events(Map<String,Object> model){
@@ -115,7 +117,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	// Testing for bound_coords table
+	//test function for inputing data into the bound_coords table in the database
 	@CrossOrigin
 	@GetMapping("/bound_coords")
 	String bound_coords(Map<String,Object> model){
@@ -141,7 +143,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	//Testing for evacuee table
+	//test function for inputing data into the evacuee table in the database
 	@CrossOrigin
 	@GetMapping("/evacuee")
 	String evacuee(Map<String,Object> model){
@@ -174,7 +176,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	// Testing for reports table
+	// test function for inputing data into the reports table in the database
 	@CrossOrigin
 	@GetMapping("/reports")
 	String reports(Map<String,Object> model){
@@ -199,7 +201,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	// Testing for Routes table
+	// test function for inputing data into the routes table in the database
 	@CrossOrigin
 	@GetMapping("/routes")
 	String routes(Map<String,Object> model){
@@ -224,7 +226,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	// Testing for waypoints table
+	// test function for inputing data into the waypoint table in the database
 	@CrossOrigin
 	@GetMapping("/waypoints")
 	String waypoints(Map<String,Object> model){
@@ -250,7 +252,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	// Testing for locations table
+	// test function for inputing data into the location table in the database
 	@CrossOrigin
 	@GetMapping("/locations")
 	String locations(Map<String,Object> model){
@@ -274,6 +276,8 @@ public class BeeWebserverApplication {
 			return "idiot";
 		}
 	}
+
+	//function prefabs for the updating functionality that we didn't have time to implement
 	/*return relevant info
 	@GetMapping("/Return_Location")
 	String Return_Location(){
@@ -364,6 +368,7 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
+	// function that updates the name of the user corresponding the to the uuid in the database
 	@CrossOrigin
 	@PostMapping(path = "/Update_Username", consumes = "application/json")
 	public ResponseEntity<String> Make_Report(@RequestBody Evacuee evac){
@@ -438,6 +443,7 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
+	// function that changes the acknowledged bool in the database to true
 	@CrossOrigin
 	@PostMapping(path = "/Acknowledge_Notification", consumes = "application/json")
 	public ResponseEntity<String> Acknowledge_Notification(@RequestBody Evacuee evacuee){
@@ -454,6 +460,7 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(z,HttpStatus.OK);
 	}
 
+	// function that fetches the amount of people in the zone and how many people are safe and sends them as a json
 	@CrossOrigin
 	@GetMapping(path = "/Return_Acknowledge_Count", produces = "application/json")
 	public ResponseEntity<String> Return_Acknowledge_Count(){
@@ -603,6 +610,7 @@ public class BeeWebserverApplication {
 	}s
 	*/
 
+	//grabs all the locations in the evacuee table and sends it all back to the requester
 	@CrossOrigin
 	@GetMapping(path = "/Get_User_Locations", produces = "application/json")
 	public ResponseEntity<String> Get_User_Locations(){
@@ -624,6 +632,7 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	// function called to update the location of evacuee
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations(@RequestBody String feature){
@@ -794,12 +803,15 @@ public class BeeWebserverApplication {
 		}
 	}
 
+	// test fucntion on sending data back to the mobile applicaiton
 	@CrossOrigin
 	@GetMapping(path = "/Return_Location_M", produces = "application/json")
 	public ResponseEntity<String> Return_Location_M(){
 		return new ResponseEntity<>("Data request recieved", HttpStatus.OK);
 	}
 	
+
+	// database connection function
 	@Bean
 	public DataSource dataSource() throws SQLException
 	{
