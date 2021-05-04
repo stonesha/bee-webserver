@@ -1,3 +1,5 @@
+// Class container for generic feature data, which is parsed later
+
 package com.Bee.BeeWebserver;
 import java.util.*;
 

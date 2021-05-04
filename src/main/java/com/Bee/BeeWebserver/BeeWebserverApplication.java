@@ -309,7 +309,7 @@ public class BeeWebserverApplication {
 	}
 	*/
 
-	//attempt to mark safe when mobile app sends
+	//Marks specified user safe, recieves from mobile application.
 	@CrossOrigin
 	@PostMapping(path = "/Mark_Safe_M/{id}", consumes = "application/json")
 	public ResponseEntity<String> Mark_Safe(@PathVariable String id, @RequestBody Locations test){
@@ -328,7 +328,10 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
-	//marking not safe when the mobile app sends a not safe flag
+	// marking not safe when the mobile app sends a not safe flag
+	// Receives JSON from mobile app, with the ID of the mobile user included in the path information
+	// Updates database with path information
+	// Returns safe string, or error
 	@CrossOrigin
 	@PostMapping(path = "/Mark_Not_Safe_M/{id}", consumes = "application/json")
 	public ResponseEntity<String> Mark_Not_Safe(@PathVariable String id, @RequestBody Locations test){
@@ -347,7 +350,9 @@ public class BeeWebserverApplication {
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
 
-	//attempted function in creating a report from the mobile app
+	//Recieves report from mobile application, parses and sends to database.
+	// Receives JSOn object, parses it, and sends to database via query
+	// Returns error or success
 	@CrossOrigin
 	@PostMapping(path = "/User_Report", consumes = "application/json")
 	public ResponseEntity<String> Make_Report(@RequestBody Reports test){
@@ -369,6 +374,8 @@ public class BeeWebserverApplication {
 	}
 
 	// function that updates the name of the user corresponding the to the uuid in the database
+	// Receives a Json object, parses it into an evacuee object, and sends a database query to update the specified field
+	// Returns error, or success string
 	@CrossOrigin
 	@PostMapping(path = "/Update_Username", consumes = "application/json")
 	public ResponseEntity<String> Make_Report(@RequestBody Evacuee evac){
@@ -383,9 +390,8 @@ public class BeeWebserverApplication {
 		String file = "username updated";
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
-	
-	// Sends Report info to web application
-	/* NOT DONE
+	 
+	/* Deprecated get_safe_count 
 	@CrossOrigin
 	@GetMapping(path = "/Send_Report", produces = "application/json")
 	public ResponseEntity<String> Send_Report(){
@@ -464,7 +470,6 @@ public class BeeWebserverApplication {
 	@CrossOrigin
 	@GetMapping(path = "/Return_Acknowledge_Count", produces = "application/json")
 	public ResponseEntity<String> Return_Acknowledge_Count(){
-		//might want to change the response entity to the class container maybe?
 
 		Integer total = 0;
 		Integer acknowledged = 0;
@@ -486,6 +491,7 @@ public class BeeWebserverApplication {
 			}
 
 			//Convert to json - Json won't format correctly unless you use the class container (in this case Safe_Evac)
+			// This is false, leaving in case this needs to be changed in the future.
 			//Safe_Evac safeCont = new Safe_Evac(total,safe);
 
 			Gson gson = new Gson();
@@ -500,7 +506,9 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	//Recieve instructions from web application
+	//Receive instructions from web application
+	// Receives json object from web application, parses, and sends to database
+	// Returns string with either an error, or the success message
 	@CrossOrigin
 	@PostMapping(path = "/Input_Instructions", consumes = "application/json")
 	public ResponseEntity<String> Input_Instructions(@RequestBody Events event){
@@ -519,6 +527,8 @@ public class BeeWebserverApplication {
 	}
 
 	//Send Instructions to mobile application
+	// Sends JSON object to whatever connects to it, containing information from the most recently input instruction
+	// returns the JSON object or an error
 	@CrossOrigin
 	@GetMapping(path = "/Send_Instructions", produces = "application/json")
 	public ResponseEntity<String> Send_Instructions(){
@@ -550,7 +560,8 @@ public class BeeWebserverApplication {
 	}
 
 	// Returns count of users that have marked themselves safe to web application.
-	// complete
+	// When connected, queries database for number of users in evacuee and number of users marked safe
+	// Returns both as a json, or returns the error
 	@CrossOrigin
 	@GetMapping(path = "/Return_Safe_Count", produces = "application/json")
 	public ResponseEntity<String> Return_Safe_Count(){
@@ -610,7 +621,9 @@ public class BeeWebserverApplication {
 	}s
 	*/
 
-	//grabs all the locations in the evacuee table and sends it all back to the requester
+	// grabs all the locations in the evacuee table and sends it all back to the requester
+	// Queries database, stores all evacuee information in a string, and formats it as a JSON
+	// Returns the JSON, or the error message.
 	@CrossOrigin
 	@GetMapping(path = "/Get_User_Locations", produces = "application/json")
 	public ResponseEntity<String> Get_User_Locations(){
@@ -632,14 +645,18 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	// function called to update the location of evacuee
+	// Receives location data from the Web Application after the user creates an object on the map
+	// Receives a JSON object from the web App
+	// Returns the ID of the created object, or an error.
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations(@RequestBody String feature){
 
+		// Convers the JSON to a string for easier parsing
 		String test = new String(feature);
 		Integer id = 0;
-
+		
+		// If the added feature is a Polygon, it is considered a zone and is added to the bound_coords table
 		if(test.indexOf("Polygon") != -1){
 			try(Connection connection = dataSource.getConnection())
 			{
@@ -654,6 +671,8 @@ public class BeeWebserverApplication {
 			catch(Exception e){
 				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
+
+		// If the feature is a LineString, it is considered a route and is added to the Routes table
 		} else if(test.indexOf("LineString") != -1){
 			try(Connection connection = dataSource.getConnection())
 			{
@@ -668,6 +687,8 @@ public class BeeWebserverApplication {
 			catch(Exception e){
 				return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 			}
+
+		// If the feature is a Point, it is considered a waypoint and is added to the waypoint table
 		} else if(test.indexOf("Point") != -1){
 			try(Connection connection = dataSource.getConnection())
 			{
@@ -687,6 +708,8 @@ public class BeeWebserverApplication {
 	}
 
 	// Sends all zone data to mobile application from database
+	// Queries database for zone information, concatenates it to a string, and formats the string as JSON
+	// Returns the JSON or an error message.
 	@CrossOrigin
 	@GetMapping(path = "/Send_Zone", produces = "application/json")
 	public ResponseEntity<String> Send_Zone(){
@@ -706,7 +729,9 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	//Sends all route data to mobile app from database
+	// Sends all route data to mobile application from database
+	// Queries database for route information, concatenates it to a string, and formats the string as JSON
+	// Returns the JSON or an error message.
 	@CrossOrigin
 	@GetMapping(path = "/Send_Route", produces = "application/json")
 	public ResponseEntity<String> Send_Route(){
@@ -727,7 +752,9 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	//Sends all point data to mobile app
+	// Sends all waypoint data to mobile application from database
+	// Queries database for waypoint information, concatenates it to a string, and formats the string as JSON
+	// Returns the JSON or an error message.
 	@CrossOrigin
 	@GetMapping(path = "/Send_Point", produces = "application/json")
 	public ResponseEntity<String> Send_Point(){
@@ -747,7 +774,9 @@ public class BeeWebserverApplication {
 		}
 	}
 
-	//recives the location of the user and updates their location in the database
+	//receives the location of the user and updates their location in the database
+	// Receives a json object, parses it, and formats a database query to update the information
+	// Returns an exception or the success message.
 	@CrossOrigin
 	@PostMapping(path = "/Input_Location_M", consumes = "application/json")
 	public ResponseEntity<String> Input_Locations_M(@RequestBody Locations test){

@@ -1,3 +1,5 @@
+// Class container for events data
+
 package com.Bee.BeeWebserver;
 
 public class Events{

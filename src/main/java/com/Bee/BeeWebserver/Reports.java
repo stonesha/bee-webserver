@@ -1,3 +1,5 @@
+// Class container for reports data
+
 package com.Bee.BeeWebserver;
 
 public class Reports{

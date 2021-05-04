@@ -1,3 +1,5 @@
+// Class container for evacuee table
+
 package com.Bee.BeeWebserver;
 
 public class Evacuee{
