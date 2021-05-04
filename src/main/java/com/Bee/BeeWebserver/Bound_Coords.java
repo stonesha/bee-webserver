@@ -1,3 +1,5 @@
+// Class container for bound_coords data
+
 package com.Bee.BeeWebserver;
 
 public class Bound_Coords{

@@ -1,3 +1,5 @@
+// Compressed class container for evacuee data, used for the return_safe_count function
+
 package com.Bee.BeeWebserver;
 
 public class Safe_Evac{

@@ -1,3 +1,5 @@
+// Class container for location data
+
 package com.Bee.BeeWebserver;
 
 public class Locations {

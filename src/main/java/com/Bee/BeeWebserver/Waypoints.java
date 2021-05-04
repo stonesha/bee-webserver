@@ -1,3 +1,5 @@
+// Class container for waypoint data
+
 package com.Bee.BeeWebserver;
 
 public class Waypoints{
